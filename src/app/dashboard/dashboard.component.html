@@ -31,7 +31,7 @@
     <div *ngIf="obrasRecentes.length > 0" class="recent-works">
       <h3>Obras Recentes</h3>
       <div class="work-list">
-        <div *ngFor="let obra of obrasRecentes" class="work-item">
+        <div *ngFor="let obra of obrasRecentes" class="work-item" [routerLink]="['/obras', obra.id]">
           <h4>{{ obra.nome }}</h4>
           <p>Localização: {{ obra.localizacao }}</p>
           <p>Status: {{ getStatusName(obra.status) }}</p>

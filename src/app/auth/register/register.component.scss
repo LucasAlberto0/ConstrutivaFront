@@ -1,4 +1,4 @@
-.login-container {
+.register-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,7 +7,7 @@
   font-family: Arial, sans-serif;
 }
 
-.login-card {
+.register-card {
   background-color: #fff;
   padding: 2rem;
   border-radius: 8px;
@@ -41,7 +41,8 @@ label {
 }
 
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="text"] {
   width: 100%;
   padding: 0.8rem;
   border: 1px solid #ddd;
@@ -50,7 +51,7 @@ input[type="password"] {
   font-size: 1rem;
 }
 
-.btn-login {
+.btn-register {
   width: 100%;
   padding: 0.8rem;
   background-color: #e53935; // Red color
@@ -63,7 +64,7 @@ input[type="password"] {
   margin-top: 1rem;
 }
 
-.btn-login:hover {
+.btn-register:hover {
   background-color: #c62828; // Darker red on hover
 }
 
@@ -73,19 +74,13 @@ input[type="password"] {
   font-size: 0.9rem;
 }
 
-.forgot-password {
-  display: block;
+.success-message {
+  color: #4CAF50; // Green for success
   margin-top: 1rem;
-  color: #e53935;
-  text-decoration: none;
   font-size: 0.9rem;
 }
 
-.forgot-password:hover {
-  text-decoration: underline;
-}
-
-.register-link {
+.login-link {
   display: block;
   margin-top: 1rem;
   color: #0277bd; // Blue for link
@@ -93,6 +88,6 @@ input[type="password"] {
   font-size: 0.9rem;
 }
 
-.register-link:hover {
+.login-link:hover {
   text-decoration: underline;
 }

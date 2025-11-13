@@ -1,6 +1,6 @@
 <div class="login-container">
   <div class="login-card">
-    <img src="assets/logoMP.png" alt="MP Logo" class="logo">
+    <img src="assets/mp_logo.png" alt="MP Logo" class="logo">
     <h2>Login</h2>
     <form (ngSubmit)="onLogin()">
       <div class="form-group">
@@ -14,6 +14,7 @@
       <button type="submit" class="btn-login">Entrar</button>
       <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
       <a href="#" class="forgot-password">Esqueceu a senha?</a>
+      <a [routerLink]="['/register']" class="register-link">Não tem uma conta? Cadastre-se</a>
     </form>
   </div>
 </div>

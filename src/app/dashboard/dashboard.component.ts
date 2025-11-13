@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router'; // Import RouterLink
 import { DashboardService } from '../shared/dashboard.service';
 import { DashboardSummaryDto } from '../shared/models/dashboard.model';
 import { ObraListagemDto } from '../shared/models/obra.model';
@@ -7,7 +8,7 @@ import { ObraListagemDto } from '../shared/models/obra.model';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink], // Add RouterLink to imports
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
