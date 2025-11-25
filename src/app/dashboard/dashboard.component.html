@@ -69,7 +69,7 @@
         <div *ngFor="let obra of obrasRecentes" class="card work-item" [routerLink]="['/obras', obra.id]">
           <div class="work-title">
             <h4>{{ obra.nome }}</h4>
-            <div class="pill">{{ getStatusName(obra.status) }}</div>
+            <div class="pill" [ngClass]="getStatusClass(obra.status)">{{ getStatusName(obra.status) }}</div>
           </div>
           <div class="work-local"><img src="img/localIcon.svg" alt="">
             <p>{{ obra.localizacao }}</p>

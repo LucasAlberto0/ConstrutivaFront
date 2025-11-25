@@ -185,12 +185,10 @@ h1 {
   }
 }
 
-.pill{
+.pill {
   font-size: 0.7rem;
-  color: #2463EA;
   padding: 5px;
-  background-color: #e6f1f7;
-  border: 1px solid #2463EA;
+  border: 1px solid;
   border-radius: 10px;
 }
 
@@ -246,8 +244,28 @@ h1 {
   .work-item h4 {
     font-size: 1rem;
   }
+}
 
-  .work-item p {
-    font-size: 0.8rem;
-  }
+.status-andamento {
+  color: #2463ea;
+  background-color: #e6f1f7;
+  border-color: #2463ea;
+}
+
+.status-manutencao {
+  color: #f59e0b;
+  background-color: #fef9e7;
+  border-color: #f59e0b;
+}
+
+.status-suspensa {
+  color: #ef4444;
+  background-color: #feeded;
+  border-color: #ef4444;
+}
+
+.status-finalizada {
+  color: #10b981;
+  background-color: #e7f8f3;
+  border-color: #10b981;
 }

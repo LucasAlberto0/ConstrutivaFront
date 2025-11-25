@@ -48,4 +48,14 @@ export class DashboardComponent implements OnInit {
       default: return 'Desconhecido';
     }
   }
+
+  getStatusClass(status: number | undefined): string {
+    switch (status) {
+      case 0: return 'status-andamento';
+      case 1: return 'status-manutencao';
+      case 2: return 'status-suspensa';
+      case 3: return 'status-finalizada';
+      default: return '';
+    }
+  }
 }
