@@ -7,9 +7,10 @@
   <div *ngIf="dashboardSummary && !loading" class="summary-cards">
     <div class="card-stats card-total">
       <div class="descricao-card">
-      <h3>Total</h3>
-      <h1>{{ dashboardSummary.totalObras }}</h1>
-      <p>Total de Obras</p></div>
+        <h3>Total</h3>
+        <h1>{{ dashboardSummary.totalObras }}</h1>
+        <p>Total de Obras</p>
+      </div>
       <article>
         <img src="img/equalsIcon.svg" alt="">
       </article>
@@ -17,10 +18,10 @@
 
     <div class="card-stats card-em-andamento">
       <div class="descricao-card">
-      <h3>Em Andamento</h3>
-      <h1>{{ dashboardSummary.obrasEmAndamento }}</h1>
-      <p>Obras em execução</p>
-  </div>
+        <h3>Em Andamento</h3>
+        <h1>{{ dashboardSummary.obrasEmAndamento }}</h1>
+        <p>Obras em execução</p>
+      </div>
       <article>
         <img src="img/buildingIcon.svg" alt="">
       </article>
@@ -28,9 +29,10 @@
 
     <div class="card-stats card-em-manutencao">
       <div class="descricao-card">
-      <h3>Em Manutenção</h3>
-      <h1>{{ dashboardSummary.obrasEmManutencao }}</h1>
-    <p>Requerendo manutenção</p></div>
+        <h3>Em Manutenção</h3>
+        <h1>{{ dashboardSummary.obrasEmManutencao }}</h1>
+        <p>Requerendo manutenção</p>
+      </div>
       <article>
         <img src="img/maintenanceIcon.svg" alt="">
       </article>
@@ -38,33 +40,40 @@
 
     <div class="card-stats card-suspensas">
       <div class="descricao-card">
-      <h3>Suspensas</h3>
-      <h1>{{ dashboardSummary.obrasSuspensas }}</h1>
-    <p>Obras pausadas</p></div>
-    <article>
-      <img src="img/pauseIcon.svg" alt="">
-    </article>
+        <h3>Suspensas</h3>
+        <h1>{{ dashboardSummary.obrasSuspensas }}</h1>
+        <p>Obras pausadas</p>
+      </div>
+      <article>
+        <img src="img/pauseIcon.svg" alt="">
+      </article>
     </div>
 
     <div class="card-stats card-finalizadas">
       <div class="descricao-card">
-      <h3>Finalizadas</h3>
-      <h1>{{ dashboardSummary.obrasFinalizadas }}</h1>
-    <p>Concluídos com sucesso</p></div>
-    <article>
-      <img src="img/checkIcon.svg" alt="">
-    </article>
+        <h3>Finalizadas</h3>
+        <h1>{{ dashboardSummary.obrasFinalizadas }}</h1>
+        <p>Concluídos com sucesso</p>
+      </div>
+      <article>
+        <img src="img/checkIcon.svg" alt="">
+      </article>
     </div>
   </div>
 
   <ng-container *ngIf="dashboardSummary?.obrasRecentes as obrasRecentes">
     <div *ngIf="obrasRecentes.length > 0" class="card recent-works">
-      <h3>Obras Recentes</h3>
+      <h2>Obras Recentes</h2>
+      <p>Acompanhe o progresso das obras em andamento</p>
       <div class="work-list">
         <div *ngFor="let obra of obrasRecentes" class="card work-item" [routerLink]="['/obras', obra.id]">
-          <h4>{{ obra.nome }}</h4>
-          <p>Localização: {{ obra.localizacao }}</p>
-          <p>Status: {{ getStatusName(obra.status) }}</p>
+          <div class="work-title">
+            <h4>{{ obra.nome }}</h4>
+            <div class="pill">{{ getStatusName(obra.status) }}</div>
+          </div>
+          <div class="work-local"><img src="img/localIcon.svg" alt="">
+            <p>{{ obra.localizacao }}</p>
+          </div>
           <p>Início: {{ obra.dataInicio | date:'shortDate' }}</p>
           <p>Término: {{ obra.dataTermino | date:'shortDate' }}</p>
         </div>
