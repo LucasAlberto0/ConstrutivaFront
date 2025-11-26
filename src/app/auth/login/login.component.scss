@@ -1,21 +1,60 @@
-.login-container {
+.auth-page-container {
+  display: flex;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #f0f2f5; // Light gray background
+}
+
+.content-section {
+  flex: 3; // 60% of the width
+  background-color: #e53935; // Red theme
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  text-align: center;
+  gap: 1rem;
+  img{
+    width: 320px ;
+    height: 320px;
+    margin-bottom: 20px;
+  }
+}
+
+
+.marketing-phrase h1 {
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+.marketing-phrase p {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin: 4px;
+}
+
+.form-section {
+  flex: 2; // 40% of the width
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background-color: #f0f2f5; // Light gray background
-  font-family: Arial, sans-serif;
+  background-color: white;
+  padding: 2rem;
 }
 
 .login-card {
-  text-align: center;
   width: 100%;
-  max-width: 320px; // Responsive up to 320px
-  box-sizing: border-box; // Include padding in width
+  max-width: 400px; // Max width for the form itself
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
 .logo {
-  width: 100px; // Adjust as needed
+  width: 100px;
   margin-bottom: 1.5rem;
 }
 
@@ -44,6 +83,31 @@ input[type="password"] {
   border-radius: 4px;
   box-sizing: border-box;
   font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: #ef4444; // Red focus border
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2); // Red focus shadow
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #e53935; // Red theme
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1.5rem;
+}
+
+.btn-primary:hover {
+  background-color: #c62828; // Darker red on hover
 }
 
 .error-message {
@@ -67,11 +131,39 @@ input[type="password"] {
 .register-link {
   display: block;
   margin-top: 1rem;
-  color: #0277bd; // Blue for link
+  color: #e53935; // Red theme
   text-decoration: none;
   font-size: 0.9rem;
 }
 
 .register-link:hover {
   text-decoration: underline;
+}
+
+@media (max-width: 900px){
+  .content-section {
+    display: none; // Hide content section on small screens
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .marketing-phrase h1 {
+    font-size: 2rem;
+  }
+
+  .marketing-phrase p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .form-section {
+    flex: 1; // Take full width
+  }
+
+  .login-card {
+    box-shadow: none; // Remove shadow on very small screens
+    padding: 1rem;
+  }
 }

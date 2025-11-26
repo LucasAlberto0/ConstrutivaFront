@@ -1,20 +1,29 @@
-<div class="login-container">
-  <div class="card login-card">
-    <img src="img/logoMP.png" alt="MP Logo" class="logo">
-    <h2>Login</h2>
-    <form (ngSubmit)="onLogin()">
-      <div class="form-group">
-        <label for="email">E-mail</label>
-        <input type="email" id="email" name="email" [(ngModel)]="loginData.email" required>
-      </div>
-      <div class="form-group">
-        <label for="password">Senha</label>
-        <input type="password" id="password" name="password" [(ngModel)]="loginData.password" required>
-      </div>
-      <button type="submit" class="btn-primary">Entrar</button>
-      <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
-      <a href="#" class="forgot-password">Esqueceu a senha?</a>
-      <a [routerLink]="['/register']" class="register-link">Não tem uma conta? Cadastre-se</a>
-    </form>
+<div class="auth-page-container">
+  <div class="content-section">
+    <img src="img/bannerMP.png" alt="Company Logo" class="company-logo">
+    <div class="marketing-phrase">
+      <h1>Sua Gestão de Obras Simplificada.</h1>
+      <p>Conectando equipes, otimizando projetos e construindo o futuro.</p>
+    </div>
+  </div>
+  <div class="form-section">
+    <div class="login-card">
+      <img src="img/logoMP.png" alt="MP Logo" class="logo">
+      <h2>Login</h2>
+      <form (ngSubmit)="onLogin()">
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" [(ngModel)]="loginData.email" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Senha</label>
+          <input type="password" id="password" name="password" [(ngModel)]="loginData.password" required>
+        </div>
+        <button type="submit" class="btn-primary">Entrar</button>
+        <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+        <a href="#" class="forgot-password">Esqueceu a senha?</a>
+        <a [routerLink]="['/register']" class="register-link">Não tem uma conta? Cadastre-se</a>
+      </form>
+    </div>
   </div>
 </div>
