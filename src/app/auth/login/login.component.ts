@@ -1,27 +1,27 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
-import { FloatLabelModule } from 'primeng/floatlabel';
-import { PasswordModule } from 'primeng/password';
+
+
+
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
-import { InputTextModule } from 'primeng/inputtext';
+
 import { AuthService } from '../../shared/auth.service';
-import { MessageModule } from 'primeng/message';
+
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
-import { ToastModule } from 'primeng/toast';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 import { HttpErrorResponse } from '@angular/common/http';
 
 
  @Component({
   selector: 'app-login',
-  imports: [CommonModule, RouterLink, ButtonModule, FormsModule, PasswordModule, FloatLabelModule, InputTextModule, ReactiveFormsModule, MessageModule, ToastModule],
+  imports: [CommonModule, RouterLink, FormsModule, ReactiveFormsModule, MatSnackBarModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
-  providers: [MessageService],
+  providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class LoginComponent implements OnInit {
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   private _router = inject(Router);
   clickLogar: boolean = false;
-  constructor(private _fb: FormBuilder, private _authService: AuthService, private _messageService: MessageService) { }
+  constructor(private _fb: FormBuilder, private _authService: AuthService, private _snackBar: MatSnackBar) { }
   loading: Boolean = false;
   submitted = false;
 
@@ -49,26 +49,34 @@ export class LoginComponent implements OnInit {
     const emailControl = form.get('email');
     const senhaControl = form.get('senha');
 
-    if(emailControl?.hasError('required')) return this._toast('warn', 'Campo obrigatório', 'O email é obrigatório.');
+    if(emailControl?.hasError('required')) {
+      this._snackBar.open('Campo obrigatório', 'O email é obrigatório.', { duration: 3000, verticalPosition: 'top', panelClass: ['warn-snackbar'] });
+      return;
+    }
 
-    if(emailControl?.hasError('email')) return this._toast('error', 'Email inválido', 'Digite um endereço de email válido');
+    if(emailControl?.hasError('email')) {
+      this._snackBar.open('Email inválido', 'Digite um endereço de email válido', { duration: 3000, verticalPosition: 'top', panelClass: ['error-snackbar'] });
+      return;
+    }
 
-    if(senhaControl?.hasError('required')) return this._toast('warn', 'Campo obrigatório', 'A senha é obrigatória.');
+    if(senhaControl?.hasError('required')) {
+      this._snackBar.open('Campo obrigatório', 'A senha é obrigatória.', { duration: 3000, verticalPosition: 'top', panelClass: ['warn-snackbar'] });
+      return;
+    }
 
-    if(!form.valid)  return this._toast('warn', 'Formulário inválido', 'Preencha todos os campos corretamente.');
+    if(!form.valid) {
+      this._snackBar.open('Formulário inválido', 'Preencha todos os campos corretamente.', { duration: 3000, verticalPosition: 'top', panelClass: ['warn-snackbar'] });
+      return;
+    }
 
     const { email, senha } = form.getRawValue();
 
     this._authService.login({ email, password: senha }).subscribe({
       next: (value: { token: string }) => {
         localStorage.setItem('token', value.token);
+        this._snackBar.open('Login realizado!', 'Bem-vindo!', { duration: 2500, verticalPosition: 'top' });
 
-        this._messageService.add({
-          severity: 'success',
-          summary: 'Login realizado!',
-          detail: 'Bem-vindo!',
-          life: 2500
-        });
+
 
         setTimeout(() => {
           this._router.navigateByUrl('/dashboard');
@@ -81,12 +89,8 @@ export class LoginComponent implements OnInit {
         if (err instanceof HttpErrorResponse && err.error && err.error.message) {
           errorMessage = err.error.message;
         }
-        this._messageService.add({
-          severity: 'error',
-          summary: 'Erro ao fazer login',
-          detail: errorMessage,
-          life: 3000,
-        });
+        this._snackBar.open('Erro ao fazer login', errorMessage, { duration: 3000, verticalPosition: 'top', panelClass: ['error-snackbar'] });
+
         this.submitted = false;
         this.load(0);
       }
@@ -94,10 +98,7 @@ export class LoginComponent implements OnInit {
     this.clickLogar = false;
   }
 
-  private _toast(severity: 'success' | 'info' | 'warn' | 'error', summary: string, detail: string) {
-    this._messageService.add({ severity, summary, detail, life: 3000, });
-    this.load(0);
-  }
+
   load(time = 1000000) {
         this.loading = true;
 
