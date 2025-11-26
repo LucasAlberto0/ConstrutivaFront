@@ -10,6 +10,21 @@ h1{
   margin: 5px 0px;
 }
 
+.obra-actions{
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  button{
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    img{
+      width: 16px;
+      height: 16px;
+  }}
+}
+
 .btn-back {
   background-color: #f0f0f0;
   color: #333;

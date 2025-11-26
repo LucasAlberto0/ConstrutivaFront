@@ -124,7 +124,7 @@ export class ObraDetailComponent implements OnInit {
   }
 
   deleteObra(): void {
-    if (this.obraId && confirm('Are you sure you want to delete this obra?')) {
+    if (this.obraId && confirm('Você tem certeza que deseja excluir esta obra?')) {
       this.obraService.deleteObra(this.obraId).subscribe({
         next: () => {
           this.router.navigate(['/obras']); // Navigate back to obras list after deletion

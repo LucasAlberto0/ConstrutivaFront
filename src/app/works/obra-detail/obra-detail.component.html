@@ -1,10 +1,11 @@
 <div class="obra-detail-container">
   <div class="obra-header">
+    <button class="btn-back" (click)="goBack()">Voltar</button> 
     <h1>{{ obra?.nome }}</h1>
+    <p class="obra-location">{{ obra?.localizacao }}</p> <!-- Restored subtitle -->
     <div class="obra-actions">
-      <button *ngIf="canEditObra" class="btn btn-primary" (click)="editObra()">Editar Obra</button>
-      <button *ngIf="canEditObra" class="btn btn-danger" (click)="deleteObra()">Excluir Obra</button>
-      <button class="btn btn-secondary" (click)="goBack()">Voltar</button>
+      <button *ngIf="canEditObra" class="btn btn-primary" (click)="editObra()"> <img src="img/editIcon.svg" alt=""><span>Editar Obra</span></button>
+      <button *ngIf="canEditObra" class="btn btn-danger" (click)="deleteObra()"><img src="img/trashIcon.svg" alt=""><span>Excluir Obra</span></button>
     </div>
   </div>
 
