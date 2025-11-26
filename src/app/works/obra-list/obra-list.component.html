@@ -1,6 +1,9 @@
 <div class="obra-list-container">
   <h1>Lista de Obras</h1>
-  <input type="text" [(ngModel)]="searchTerm" (input)="applySearchFilter()" placeholder="Buscar obras por nome..." class="search-input">
+  <div class="search-input-container">
+    <input type="text" [(ngModel)]="searchTerm" (input)="applySearchFilter()" placeholder="Buscar obras por nome..." class="search-input">
+    <img src="img/searchIcon.svg" alt="Search Icon" class="search-icon">
+  </div>
 
   <div class="custom-tab-menu">
     <button (click)="filterObras('Todas')" [class.active]="currentFilter === 'Todas'">Todas</button>

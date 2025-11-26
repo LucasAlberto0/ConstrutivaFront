@@ -11,21 +11,34 @@ h1 {
   margin-bottom: 1.5rem;
 }
 
+.search-input-container {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
 .search-input {
   width: 100%;
-  padding: 0.75rem;
-  margin-bottom: 1.5rem;
+  padding: 0.75rem 0.75rem 0.75rem 2.5rem; /* Add left padding for icon */
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 10px;
   box-sizing: border-box;
   transition: border-color 0.3s, box-shadow 0.3s;
-  border-radius: 10px;
 }
 
 .search-input:focus {
   border-color: #ef4444;
   outline: none;
   box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.2rem;
+  height: 1.2rem;
+  color: #555;
 }
 
 .loading-message, .error-message, .no-data-message {
