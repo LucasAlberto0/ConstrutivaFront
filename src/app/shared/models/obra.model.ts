@@ -106,6 +106,7 @@ export interface ObraDetalhesDto {
   dataInicio?: string;
   dataTermino?: string;
   status?: ObraStatus;
+  observacoes?: string;
   aditivos?: AditivoDto[];
   manutencoes?: ManutencaoDto[];
   diariosObra?: DiarioObraDto[];

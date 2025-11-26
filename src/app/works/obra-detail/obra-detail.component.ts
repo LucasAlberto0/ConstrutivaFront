@@ -45,8 +45,14 @@ export class ObraDetailComponent implements OnInit {
   loadObraDetails(id: number): void {
     this.loading = true;
     this.obraService.getObraById(id).subscribe({
-      next: (data) => {
-        this.obra = data;
+      next: (response: any) => {
+        if (response && response.data) {
+          this.obra = response.data;
+        } else {
+          // If the response is not wrapped, use it directly.
+          // This handles both cases, making it more robust.
+          this.obra = response;
+        }
         this.loading = false;
       },
       error: (err) => {
