@@ -2,7 +2,8 @@
 
   <div *ngIf="userInfo" class="user-welcome-banner">
     <div class="profile-pic-container">
-      <img *ngIf="userInfo.profilePictureUrl" [src]="userInfo.profilePictureUrl" alt="Foto de Perfil" class="profile-pic">
+      <img *ngIf="userInfo.profilePictureUrl" [src]="userInfo.profilePictureUrl" alt="Foto de Perfil"
+        class="profile-pic">
       <div *ngIf="!userInfo.profilePictureUrl" class="profile-pic-initials">
         <span>{{ userInfo.nomeCompleto.charAt(0) }}</span>
       </div>
@@ -13,7 +14,8 @@
     </div>
     <div class="user-details">
       <h2>Bem-vindo de volta, <span>{{ userInfo.nomeCompleto }}!</span></h2>
-      <p>{{ userInfo.email }} | Perfil: <strong>{{ userInfo.roles[0] }}</strong></p>
+      <p><img src="img/emailIcon.svg" alt="">{{ userInfo.email }} | <strong><img src="img/userIcon.svg"
+            alt="">{{ userInfo.roles[0] }}</strong></p>
     </div>
     <div *ngIf="uploadingPicture" class="upload-spinner"></div>
   </div>
@@ -88,12 +90,12 @@
     <div *ngIf="obrasRecentes.length > 0" class="card recent-works">
       <div class="main-title">
         <div>
-        <h2>Obras Recentes</h2>
-        <p>Acompanhe o progresso das obras em andamento</p>
+          <h2>Obras Recentes</h2>
+          <p>Acompanhe o progresso das obras em andamento</p>
+        </div>
+        <button [routerLink]="['/obras/criar']"><img src="img/plusIcon.svg" alt=""> Nova Obra</button>
       </div>
-      <button [routerLink]="['/obras/criar']"><img src="img/plusIcon.svg" alt=""> Nova Obra</button>
-      </div>
-      
+
       <div class="work-list">
         <div *ngFor="let obra of obrasRecentes" class="card work-item" [routerLink]="['/obras', obra.id]">
           <div class="work-title">
@@ -109,11 +111,12 @@
       </div>
     </div>
     <div *ngIf="obrasRecentes.length === 0 && !loading" class="no-data-message">
-      Nenhuma obra recente para exibir. 
+      Nenhuma obra recente para exibir.
     </div>
   </ng-container>
 
   <div *ngIf="!dashboardSummary?.obrasRecentes && !loading" class="no-data-message">
-    Nenhuma obra recente para exibir. <button [routerLink]="['/obras/criar']"><img src="img/plusIcon.svg" alt=""> Nova Obra</button>
+    Nenhuma obra recente para exibir. <button [routerLink]="['/obras/criar']"><img src="img/plusIcon.svg" alt=""> Nova
+      Obra</button>
   </div>
 </div>
