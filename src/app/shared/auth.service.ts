@@ -50,11 +50,11 @@ export class AuthService {
     return this.http.get<UserInfo>(`${this.apiUrl}/api/Auth/me`);
   }
 
-  uploadProfilePicture(file: File): Observable<{ profilePictureUrl: string }> {
+  uploadProfilePicture(file: File): Observable<{ message: string }> {
     const formData = new FormData();
     formData.append('profilePicture', file);
 
-    return this.http.post<{ profilePictureUrl: string }>(`${this.apiUrl}/api/users/me/profile-picture`, formData);
+    return this.http.post<{ message: string }>(`${this.apiUrl}/api/users/me/profile-picture`, formData);
   }
 
   logout(): void {
