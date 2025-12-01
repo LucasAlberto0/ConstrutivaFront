@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
 
   shouldShowHeader(): boolean {
     const currentUrl = this.router.url;
-    return !currentUrl.includes('/login') && !currentUrl.includes('/register');
+    return !currentUrl.includes('/login') && !currentUrl.includes('/register') && !currentUrl.includes('/landing-page');
   }
 
   shouldApplyContainerClass(): boolean {

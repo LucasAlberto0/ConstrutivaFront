@@ -1,0 +1,26 @@
+.landing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+.landing-header__logo img {
+  height: 40px;
+}
+
+.landing-header__auth a {
+  margin-left: 1rem;
+  text-decoration: none;
+  color: #333;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+}
+
+.landing-header__auth .button--primary {
+  background-color: #e53935;
+  color: #fff;
+  border-color: #e53935;
+}

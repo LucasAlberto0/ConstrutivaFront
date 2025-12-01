@@ -9,6 +9,7 @@ export const routes: Routes = [
   { path: 'obras', loadComponent: () => import('./works/obra-list/obra-list.component').then(m => m.ObraListComponent), canActivate: [AuthGuard] },
   { path: 'obras/:id', loadComponent: () => import('./works/obra-detail/obra-detail.component').then(m => m.ObraDetailComponent), canActivate: [AuthGuard] },
   { path: 'chatbot', loadComponent: () => import('./chatbot/chatbot.component').then(m => m.ChatbotComponent), canActivate: [AuthGuard] },
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' }, // Redirect to dashboard after login
-  { path: '**', redirectTo: '/dashboard' } // Wildcard route for a 404 page or redirect to dashboard
+  { path: 'landing-page', loadComponent: () => import('./landing-page/landing-page.component').then(m => m.LandingPageComponent) },
+  { path: '', redirectTo: '/landing-page', pathMatch: 'full' }, // Redirect to landing page
+  { path: '**', redirectTo: '/landing-page' } // Wildcard route for a 404 page or redirect to landing page
 ];
