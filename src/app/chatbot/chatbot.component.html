@@ -11,6 +11,16 @@
       </div>
       <img *ngIf="message.isUser" [src]="userProfilePicUrl || 'img/userIcon.svg'" alt="Você" class="message-avatar sent-avatar">
     </div>
+    <div *ngIf="isLoading" class="message-bubble-wrapper received">
+      <img src="img/robotIcon.svg" alt="Assistente" class="message-avatar received-avatar">
+      <div class="message-bubble">
+        <div class="typing-indicator">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="chat-input">
     <input type="text" [(ngModel)]="newMessage" (keyup.enter)="sendMessage()" placeholder="Digite sua mensagem...">

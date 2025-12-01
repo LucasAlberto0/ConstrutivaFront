@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '@shared/auth.service';
 import { UserInfo } from '@shared/models/user.model';
 import { environment } from '../../environments/environment';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'; // Import HttpHeaders
 
 interface Message {
   text: string;
@@ -11,10 +12,17 @@ interface Message {
   isUser: boolean;
 }
 
+interface DaiApiResponse {
+  id: string;
+  messageServiceId: string;
+  message: string;
+  response: string; // Updated to 'response'
+}
+
 @Component({
   selector: 'app-chatbot',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, HttpClientModule],
   providers: [AuthService],
   templateUrl: './chatbot.component.html',
   styleUrl: './chatbot.component.scss'
@@ -25,8 +33,16 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
   messages: Message[] = [];
   newMessage: string = '';
   userProfilePicUrl: string | undefined;
+  isLoading: boolean = false;
+  private userId: string | undefined;
+  private username: string | undefined; // To store the logged-in user's name
+  private readonly DAI_API_KEY = 'qy0WXuJeO2YpOqu4oxUkpXmppP2dR52MkadTg9GqFvfh0iyNxrsyS98sPssUt2Dy';
+  private readonly DAI_API_ENDPOINT = 'https://api.dai.tec.br/v1/chats'; // Updated endpoint
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private http: HttpClient
+  ) { }
 
   ngOnInit(): void {
     this.messages.push({
@@ -37,6 +53,8 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
 
     this.authService.getMe().subscribe({
       next: (userInfo: UserInfo) => {
+        this.userId = userInfo.id;
+        this.username = userInfo.nomeCompleto; // Store the username
         if (userInfo.profilePictureUrl) {
           this.userProfilePicUrl = this._getProfilePictureFullUrl(userInfo.profilePictureUrl);
         } else {
@@ -65,24 +83,61 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
 
   sendMessage(): void {
     if (this.newMessage.trim()) {
+      const userMessage = this.newMessage;
       this.messages.push({
-        text: this.newMessage,
+        text: userMessage,
         timestamp: new Date(),
         isUser: true
       });
       this.newMessage = '';
-      this.simulateAssistantResponse();
+      this.isLoading = true;
+      this.sendToDaiAssistant(userMessage);
     }
   }
 
-  simulateAssistantResponse(): void {
-    setTimeout(() => {
+  sendToDaiAssistant(message: string): void {
+    if (!this.userId) {
+      console.error('User ID not available. Cannot send message to Dai Assistant.');
       this.messages.push({
-        text: 'Entendi. Deixe-me verificar isso para você.',
+        text: 'Erro: ID do usuário não disponível. Por favor, tente novamente mais tarde.',
         timestamp: new Date(),
         isUser: false
       });
-    }, 1000);
+      this.isLoading = false;
+      return;
+    }
+
+    const headers = new HttpHeaders({
+      'x-api-key': this.DAI_API_KEY,
+      'Content-Type': 'application/json'
+    });
+
+    const payload = {
+      messageServiceId: this.userId,
+      username: this.username || 'Usuário', // Use username if available, otherwise a default
+      message: message
+    };
+
+    this.http.post<DaiApiResponse>(this.DAI_API_ENDPOINT, payload, { headers }).subscribe({
+      next: (response) => {
+        this.isLoading = false;
+        this.messages.push({
+          text: response.response, // Use 'response' field
+          timestamp: new Date(),
+          isUser: false
+        });
+        // TODO: Process response.comandos if needed (if the new API returns them)
+      },
+      error: (err) => {
+        this.isLoading = false;
+        console.error('Error calling Dai Assistant API:', err);
+        this.messages.push({
+          text: 'Desculpe, não consegui me conectar com a assistente no momento. Por favor, tente novamente.',
+          timestamp: new Date(),
+          isUser: false
+        });
+      }
+    });
   }
 
   scrollToBottom(): void {
