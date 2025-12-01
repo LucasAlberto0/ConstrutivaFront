@@ -1,18 +1,19 @@
 <div class="chatbot-container">
-  <div class="chat-header">
+  <div class="chat-header"> 
+    <img src="img/aiRobotIcon.svg" alt="">
     <h2>Assistente Virtual</h2>
   </div>
   <div class="chat-messages" #chatMessages>
-    <div *ngFor="let message of messages" class="message-bubble-wrapper" [ngClass]="{'sent': message.isUser, 'received': !message.isUser}">
-      <img *ngIf="!message.isUser" src="img/robotIcon.svg" alt="Assistente" class="message-avatar received-avatar">
+    <div *ngFor="let message of messages" class="message-bubble-wrapper message-animated" [ngClass]="{'sent': message.isUser, 'received': !message.isUser}">
+      <img *ngIf="!message.isUser" src="img/aiRobotIcon.svg" alt="Assistente" class="message-avatar received-avatar">
       <div class="message-bubble">
         <p>{{ message.text }}</p>
         <span class="message-time">{{ message.timestamp | date:'shortTime' }}</span>
       </div>
       <img *ngIf="message.isUser" [src]="userProfilePicUrl || 'img/userIcon.svg'" alt="Você" class="message-avatar sent-avatar">
     </div>
-    <div *ngIf="isLoading" class="message-bubble-wrapper received">
-      <img src="img/robotIcon.svg" alt="Assistente" class="message-avatar received-avatar">
+    <div *ngIf="isLoading" class="message-bubble-wrapper received message-animated">
+      <img src="img/aiRobotIcon.svg" alt="Assistente" class="message-avatar received-avatar">
       <div class="message-bubble">
         <div class="typing-indicator">
           <span></span>
@@ -24,6 +25,9 @@
   </div>
   <div class="chat-input">
     <input type="text" [(ngModel)]="newMessage" (keyup.enter)="sendMessage()" placeholder="Digite sua mensagem...">
+    <button (click)="clearHistory()" class="clear-history-button">
+      <img src="img/trashIcon.svg" alt="Limpar Histórico">
+    </button>
     <button (click)="sendMessage()">
       <img src="img/sendIcon.svg" alt="Enviar">
     </button>

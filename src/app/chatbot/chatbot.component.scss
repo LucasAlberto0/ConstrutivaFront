@@ -12,13 +12,20 @@
 }
 
 .chat-header {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
   background-color: #FF0000; 
   color: #FFFFFF;
-  padding: 0.7rem; 
   text-align: center;
   font-size: 1.1rem; 
   font-weight: 600;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  img{
+    width: 30px;
+    height: 30px;
+  }
 }
 
 .chat-messages {
@@ -55,10 +62,9 @@
 }
 
 .received-avatar {
-
+  background-color: #FF0000;
   padding: 4px; 
   box-sizing: border-box;
-  filter: invert(100%); 
 }
 
 .message-bubble {
@@ -103,7 +109,7 @@
 
 .chat-input {
   display: flex;
-  padding: 1rem;
+  padding: 1.3rem;
   border-top: 1px solid #e0e0e0;
   background-color: #FFFFFF;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
@@ -120,6 +126,32 @@
 
     &:focus {
       border-color: #FF0000; 
+    }
+  }
+
+  .clear-history-button {
+    background-color: #9e9e9e; /* Gray color for clear button */
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin-right: 0.5rem; /* Space between clear and send button */
+
+    &:hover {
+      background-color: #757575; /* Darker gray on hover */
+      transform: translateY(-1px);
+    }
+
+    img {
+      width: 24px;
+      height: 24px;
+      filter: invert(100%);
     }
   }
 
@@ -158,7 +190,6 @@
   }
 
   .chat-header {
-    padding: 0.8rem;
     font-size: 1.1rem;
   }
 
@@ -173,7 +204,7 @@
   }
 
   .chat-input {
-    padding: 0.7rem;
+    padding: 0.8rem;
     input {
       padding: 0.6rem 0.8rem;
       font-size: 0.9rem;
@@ -185,6 +216,10 @@
         width: 20px;
         height: 20px;
       }
+    }
+    .clear-history-button {
+      width: 40px;
+      height: 40px;
     }
   }
 }
@@ -224,5 +259,21 @@
   }
   40% {
     transform: scale(1.0);
+  }
+}
+
+/* Message arrival animation */
+.message-animated {
+  animation: fadeInSlideUp 0.3s ease-out;
+}
+
+@keyframes fadeInSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

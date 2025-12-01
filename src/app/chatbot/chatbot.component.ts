@@ -38,6 +38,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
   private username: string | undefined; // To store the logged-in user's name
   private readonly DAI_API_KEY = 'qy0WXuJeO2YpOqu4oxUkpXmppP2dR52MkadTg9GqFvfh0iyNxrsyS98sPssUt2Dy';
   private readonly DAI_API_ENDPOINT = 'https://api.dai.tec.br/v1/chats'; // Updated endpoint
+  private readonly LOCAL_STORAGE_KEY = 'chatbot_messages';
 
   constructor(
     private authService: AuthService,
@@ -45,11 +46,15 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
   ) { }
 
   ngOnInit(): void {
-    this.messages.push({
-      text: 'Olá! Como posso ajudar você hoje?',
-      timestamp: new Date(),
-      isUser: false
-    });
+    this.loadMessages(); // Load messages from localStorage
+
+    if (this.messages.length === 0) {
+      this.messages.push({
+        text: 'Olá! Como posso ajudar você hoje?',
+        timestamp: new Date(),
+        isUser: false
+      });
+    }
 
     this.authService.getMe().subscribe({
       next: (userInfo: UserInfo) => {
@@ -89,6 +94,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
         timestamp: new Date(),
         isUser: true
       });
+      this.saveMessages(); // Save messages after user sends one
       this.newMessage = '';
       this.isLoading = true;
       this.sendToDaiAssistant(userMessage);
@@ -104,6 +110,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
         isUser: false
       });
       this.isLoading = false;
+      this.saveMessages(); // Save messages after error
       return;
     }
 
@@ -114,7 +121,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
 
     const payload = {
       messageServiceId: this.userId,
-      username: this.username || 'Usuário', // Use username if available, otherwise a default
+      username: this.username || 'Usuário',
       message: message
     };
 
@@ -122,11 +129,11 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
       next: (response) => {
         this.isLoading = false;
         this.messages.push({
-          text: response.response, // Use 'response' field
+          text: response.response,
           timestamp: new Date(),
           isUser: false
         });
-        // TODO: Process response.comandos if needed (if the new API returns them)
+        this.saveMessages(); // Save messages after assistant responds
       },
       error: (err) => {
         this.isLoading = false;
@@ -136,6 +143,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
           timestamp: new Date(),
           isUser: false
         });
+        this.saveMessages(); // Save messages after error
       }
     });
   }
@@ -145,4 +153,28 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
       this.chatMessagesContainer.nativeElement.scrollTop = this.chatMessagesContainer.nativeElement.scrollHeight;
     } catch (err) { }
   }
+
+  private saveMessages(): void {
+    localStorage.setItem(this.LOCAL_STORAGE_KEY, JSON.stringify(this.messages));
+  }
+
+  private loadMessages(): void {
+    const storedMessages = localStorage.getItem(this.LOCAL_STORAGE_KEY);
+    if (storedMessages) {
+      this.messages = JSON.parse(storedMessages).map((msg: Message) => ({
+        ...msg,
+        timestamp: new Date(msg.timestamp) // Convert timestamp string back to Date object
+      }));
+    }
+  }
+
+  clearHistory(): void {
+    this.messages = [{
+      text: 'Olá! Como posso ajudar você hoje?',
+      timestamp: new Date(),
+      isUser: false
+    }];
+    localStorage.removeItem(this.LOCAL_STORAGE_KEY);
+  }
 }
+
