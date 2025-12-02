@@ -22,6 +22,15 @@ $breakpoint-mobile: 480px;
     }
 }
 
+.container-content {
+    max-width: 1400px; // Increased from 1200px
+    margin: 0 auto;
+    padding: 0 20px; // Only horizontal padding for the content wrapper
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
 // --- 3. Base/Reset e Botão Comum ---
 
 h2 {
@@ -67,8 +76,9 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 20px;
+    padding: 20px 0; // Add vertical padding back to the header
     border-bottom: 1px solid $color-border;
+    width: 100%; // Explicitly set width to 100%
 }
 
 .logo {
@@ -102,9 +112,7 @@ header {
 }
 
 main {
-    padding: 0; // Removido padding para deixar a Hero section ocupar a largura
-    max-width: 1200px;
-    margin: 0 auto;
+    // Removed padding and max-width to allow content inside to control width
 }
 
 hr {
@@ -399,10 +407,11 @@ footer {
     background-color: #222;
     color: $color-light;
     text-align: center;
-    padding: 15px;
+    padding: 15px 0; // Add vertical padding back to the footer
     font-size: 0.8em;
     line-height: 1.2;
     margin-top: 40px;
+    width: 100%; // Explicitly set width to 100%
 
     p:first-child {
         font-weight: 600;
