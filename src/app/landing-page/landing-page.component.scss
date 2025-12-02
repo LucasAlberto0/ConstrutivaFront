@@ -7,7 +7,7 @@ $color-light: #fff;
 $color-gray: #666;
 $color-border: #eee;
 $breakpoint-tablet: 768px;
-$breakpoint-mobile: 480px;
+$breakpoint-mobile: 420px; // Adjusted for smaller mobile devices
 
 // --- 2. Mixins para Responsividade ---
 @mixin mobile {
@@ -23,12 +23,18 @@ $breakpoint-mobile: 480px;
 }
 
 .container-content {
-    max-width: 1400px; // Increased from 1200px
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 0 20px; // Only horizontal padding for the content wrapper
+    padding: 0 20px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
+
+    @include mobile {
+        gap: 15px;
+        width: auto; // Remove width: 100% for mobile
+    }
 }
 
 // --- 3. Base/Reset e Botão Comum ---
@@ -69,16 +75,20 @@ p {
     &:hover {
         background-color: color.adjust($color-primary, $lightness: -10%);
     }
+
+    @include mobile {
+        padding: 6px 10px; // Even smaller padding on mobile
+        font-size: 0.7em; // Even smaller font size on mobile
+    }
 }
 
 // --- 4. Layout Principal e Header ---
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 0; // Add vertical padding back to the header
+    // Removed flex properties, now handled by .container-content
+    padding: 20px 0; // Vertical padding
     border-bottom: 1px solid $color-border;
-    width: 100%; // Explicitly set width to 100%
+    width: 100%; // Re-added width: 100% for desktop
+    max-width: none; // Override any inherited max-width
 }
 
 .logo {
@@ -91,6 +101,10 @@ header {
         font-size: 1.5em;
         font-weight: 700;
         color: #000;
+
+        @include mobile {
+            font-size: 1em; // Even smaller on mobile
+        }
     }
 
     .logo-text {
@@ -103,11 +117,19 @@ header {
         font-size: 0.8em;
         color: #888;
         font-weight: 400;
+
+        @include mobile {
+            font-size: 0.6em; // Even smaller on mobile
+        }
     }
 
     .header-logo {
         width: 50px;
         margin-right: 10px;
+
+        @include mobile {
+            width: 35px; // Even smaller on mobile
+        }
     }
 }
 
@@ -407,14 +429,27 @@ footer {
     background-color: #222;
     color: $color-light;
     text-align: center;
-    padding: 15px 0; // Add vertical padding back to the footer
+    padding: 15px 0; // Vertical padding
     font-size: 0.8em;
     line-height: 1.2;
     margin-top: 40px;
-    width: 100%; // Explicitly set width to 100%
+    width: 100%; // Re-added width: 100% for desktop
+    max-width: none; // Override any inherited max-width
+
+    p { // Target all p tags in footer
+        @include mobile {
+            font-size: 0.6em; // Even smaller font size on mobile
+            line-height: 1.1; // Reduced line-height
+        }
+    }
 
     p:first-child {
         font-weight: 600;
+    }
+
+    @include mobile {
+        padding: 8px 0; // Even smaller vertical padding on mobile
+        width: auto; // Allow footer to shrink naturally on mobile
     }
 }
 

@@ -11,7 +11,8 @@ html, body {
 }
 
 .container {
-  // Removed max-width and margin to allow full width for header/footer
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 /* Global Button Styles */
