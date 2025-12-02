@@ -10,10 +10,9 @@
 }
 
 h2 {
-  color: #e53935; /* Construtiva Red */
   text-align: center;
   margin-bottom: 2rem;
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: 600;
 }
 
@@ -168,7 +167,7 @@ h2 {
   display: block;
   width: fit-content;
   margin: 1.5rem auto 0.5rem auto;
-  background-color: #28a745; /* Green */
+  background-color: #e53935; /* Green */
   color: white;
   padding: 0.8rem 2rem;
   border: none;
@@ -181,7 +180,7 @@ h2 {
 }
 
 .btn-save-checklist:hover {
-  background-color: #218838; /* Darker green */
+  background-color: #4d0403; /* Darker green */
   box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
 }
 

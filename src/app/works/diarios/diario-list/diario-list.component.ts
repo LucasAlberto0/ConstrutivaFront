@@ -207,4 +207,20 @@ export class DiarioListComponent implements OnInit {
       }
     });
   }
+
+  getClimaName(climaValue: Clima | number): string {
+    if (typeof climaValue === 'string') {
+      return climaValue; // Already a string
+    }
+    // Assuming climaValue is a number representing an enum index
+    // This mapping needs to match the backend's enum definition
+    switch (climaValue) {
+      case 0: return 'Ensolarado';
+      case 1: return 'Nublado';
+      case 2: return 'Chuvoso';
+      case 3: return 'Parcialmente Nublado';
+      case 4: return 'Tempestade';
+      default: return 'Desconhecido';
+    }
+  }
 }

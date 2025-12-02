@@ -44,10 +44,10 @@
     <h4>Diários Registrados</h4>
     <ul>
       <li *ngFor="let diario of diarios">
-        <span>{{ diario.data | date:'shortDate' }} - Clima: {{ diario.clima }}</span>
-        <div>
-          <button (click)="viewDiarioDetails(diario.id)" class="btn-info">Ver Detalhes</button>
-          <button *ngIf="canManageDiarios" (click)="deleteDiario(diario.id)" class="btn-danger">Excluir</button>
+        <span>{{ diario.data | date:'dd/MM/yyyy' }} - Clima: {{ getClimaName(diario.clima) }}</span>
+        <div class="diario-actions">
+          <button (click)="viewDiarioDetails(diario.id)" class="btn-view-details"><img src="img/descriptionIcon.svg" alt=""> Ver Detalhes</button>
+          <button *ngIf="canManageDiarios" (click)="deleteDiario(diario.id)" class="btn-delete-diario"><img src="img/trashIcon.svg" alt=""> Excluir</button>
         </div>
       </li>
     </ul>
@@ -61,7 +61,7 @@
   <div *ngIf="currentDiarioDetalhes" class="diario-details-modal">
     <div class="modal-content">
       <button class="btn-close" (click)="closeDiarioDetails()">X</button>
-      <h4>Detalhes do Diário de {{ currentDiarioDetalhes.data | date:'shortDate' }}</h4>
+      <h4>Detalhes do Diário de {{ currentDiarioDetalhes.data | date:'dd/MM/yyyy' }}</h4>
       <p><strong>Clima:</strong> {{ currentDiarioDetalhes.clima }}</p>
       <p><strong>Quantidade de Colaboradores:</strong> {{ currentDiarioDetalhes.quantidadeColaboradores }}</p>
       <p><strong>Atividades:</strong> {{ currentDiarioDetalhes.descricaoAtividades }}</p>
