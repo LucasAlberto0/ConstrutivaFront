@@ -26,8 +26,8 @@
         <img src="img/localIcon.svg" alt="">
         <p>{{ obra.localizacao }}</p>
       </div>
-      <p>Início: {{ obra.dataInicio | date:'shortDate' }}</p>
-      <p>Término: {{ obra.dataTermino | date:'shortDate' }}</p>
+      <p>Início: {{ obra.dataInicio | date:'dd/MM/yyyy' }}</p>
+      <p>Término: {{ obra.dataTermino | date:'dd/MM/yyyy' }}</p>
     </div>
   </div>
 

@@ -240,6 +240,8 @@ h1 {
 .recent-works {
   box-shadow: none;
   border: 0.5px solid #ddd;
+  padding: 1rem;
+  border-radius: 8px;
 
   h2 {
 
@@ -291,6 +293,8 @@ h1 {
   box-shadow: none;
   border: 0.5px solid #ddd;
   transition: all 0.2s ease;
+  padding: 1rem;
+  border-radius: 8px;
 
   &:hover {
     transform: translateY(-5px);
