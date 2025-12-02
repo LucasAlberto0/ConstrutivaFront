@@ -13,15 +13,25 @@
       </div>
       <div class="form-group">
         <label for="clima">Clima</label>
-        <input type="text" id="clima" name="clima" [(ngModel)]="newDiario.clima">
+        <select id="clima" name="clima" [(ngModel)]="newDiario.clima" required>
+          <option *ngFor="let climaOption of climaOptions" [value]="climaOption">{{ climaOption }}</option>
+        </select>
       </div>
       <div class="form-group">
-        <label for="colaboradores">Colaboradores</label>
-        <input type="text" id="colaboradores" name="colaboradores" [(ngModel)]="newDiario.colaboradores">
+        <label for="quantidadeColaboradores">Quantidade de Colaboradores</label>
+        <input type="number" id="quantidadeColaboradores" name="quantidadeColaboradores" [(ngModel)]="newDiario.quantidadeColaboradores">
       </div>
       <div class="form-group">
-        <label for="atividades">Atividades</label>
-        <textarea id="atividades" name="atividades" [(ngModel)]="newDiario.atividades"></textarea>
+        <label for="descricaoAtividades">Descrição das Atividades</label>
+        <textarea id="descricaoAtividades" name="descricaoAtividades" [(ngModel)]="newDiario.descricaoAtividades" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="observacoes">Observações (Opcional)</label>
+        <textarea id="observacoes" name="observacoes" [(ngModel)]="newDiario.observacoes"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="foto">Foto (Opcional)</label>
+        <input type="file" id="foto" name="foto" (change)="onFileSelected($event)">
       </div>
       <button type="submit" class="btn-primary">Adicionar Diário</button>
     </form>
@@ -50,21 +60,15 @@
       <button class="btn-close" (click)="closeDiarioDetails()">X</button>
       <h4>Detalhes do Diário de {{ currentDiarioDetalhes.data | date:'shortDate' }}</h4>
       <p><strong>Clima:</strong> {{ currentDiarioDetalhes.clima }}</p>
-      <p><strong>Colaboradores:</strong> {{ currentDiarioDetalhes.colaboradores }}</p>
-      <p><strong>Atividades:</strong> {{ currentDiarioDetalhes.atividades }}</p>
+      <p><strong>Quantidade de Colaboradores:</strong> {{ currentDiarioDetalhes.quantidadeColaboradores }}</p>
+      <p><strong>Atividades:</strong> {{ currentDiarioDetalhes.descricaoAtividades }}</p>
+      <p *ngIf="currentDiarioDetalhes.observacoes"><strong>Observações:</strong> {{ currentDiarioDetalhes.observacoes }}</p>
 
-      <h5>Fotos</h5>
-      <div *ngIf="canManageDiarios" class="form-group">
-        <input type="text" [(ngModel)]="newFotoUrl" placeholder="URL da nova foto">
-        <button (click)="addFoto(currentDiarioDetalhes.id)" class="btn-primary btn-small">Adicionar Foto</button>
+      <h5>Foto</h5>
+      <div *ngIf="currentDiarioPhotoUrl" class="photo-item">
+        <img [src]="currentDiarioPhotoUrl" alt="Foto do Diário" style="max-width: 100%; height: auto;">
       </div>
-      <div class="photos-grid">
-        <div *ngFor="let foto of currentDiarioDetalhes.fotos" class="photo-item">
-          <img [src]="foto.url" alt="Foto do Diário">
-          <button *ngIf="canManageDiarios" (click)="deleteFoto(currentDiarioDetalhes.id, foto.id)" class="btn-danger btn-small">X</button>
-        </div>
-      </div>
-      <p *ngIf="!currentDiarioDetalhes.fotos || currentDiarioDetalhes.fotos.length === 0">Nenhuma foto.</p>
+      <p *ngIf="!currentDiarioPhotoUrl">Nenhuma foto.</p>
 
       <h5>Comentários</h5>
       <div *ngIf="canManageDiarios" class="form-group">

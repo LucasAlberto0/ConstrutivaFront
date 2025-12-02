@@ -21,26 +21,48 @@ export class DiarioService {
   }
 
   createDiario(obraId: number, diario: DiarioObraCriacaoDto): Observable<DiarioObraDetalhesDto> {
-    return this.http.post<DiarioObraDetalhesDto>(`${this.apiUrl}/api/obras/${obraId}/Diarios`, diario);
+    const formData = new FormData();
+    formData.append('data', diario.data);
+    formData.append('clima', diario.clima);
+    formData.append('quantidadeColaboradores', diario.quantidadeColaboradores.toString());
+    formData.append('descricaoAtividades', diario.descricaoAtividades);
+    if (diario.observacoes) {
+      formData.append('observacoes', diario.observacoes);
+    }
+    formData.append('obraId', diario.obraId.toString());
+    if (diario.foto) {
+      formData.append('foto', diario.foto, diario.foto.name);
+    }
+    if (diario.comentarios && diario.comentarios.length > 0) {
+      formData.append('comentarios', JSON.stringify(diario.comentarios));
+    }
+    return this.http.post<DiarioObraDetalhesDto>(`${this.apiUrl}/api/obras/${obraId}/Diarios`, formData);
   }
 
-  updateDiario(obraId: number, id: number, diario: DiarioObraAtualizacaoDto): Observable<any> {
-    return this.http.put(`${this.apiUrl}/api/obras/${obraId}/Diarios/${id}`, diario);
+  updateDiario(obraId: number, id: number, diario: DiarioObraAtualizacaoDto): Observable<DiarioObraDetalhesDto> {
+    const formData = new FormData();
+    formData.append('data', diario.data);
+    formData.append('clima', diario.clima);
+    formData.append('quantidadeColaboradores', diario.quantidadeColaboradores.toString());
+    formData.append('descricaoAtividades', diario.descricaoAtividades);
+    if (diario.observacoes) {
+      formData.append('observacoes', diario.observacoes);
+    }
+    if (diario.foto) {
+      formData.append('foto', diario.foto, diario.foto.name);
+    }
+    return this.http.put<DiarioObraDetalhesDto>(`${this.apiUrl}/api/obras/${obraId}/Diarios/${id}`, formData);
   }
 
   deleteDiario(obraId: number, id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/api/obras/${obraId}/Diarios/${id}`);
   }
 
-  addFotoToDiario(obraId: number, diarioId: number, fotoUrl: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/api/obras/${obraId}/Diarios/${diarioId}/fotos`, JSON.stringify(fotoUrl), {
-      headers: { 'Content-Type': 'application/json' }
-    });
+  getDiarioPhoto(obraId: number, diarioId: number): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/api/obras/${obraId}/Diarios/${diarioId}/foto`, { responseType: 'blob' });
   }
 
-  deleteFotoFromDiario(obraId: number, diarioId: number, fotoId: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/api/obras/${obraId}/Diarios/${diarioId}/fotos/${fotoId}`);
-  }
+  // Removed addFotoToDiario and deleteFotoFromDiario as per new API spec
 
   addComentarioToDiario(obraId: number, diarioId: number, comentario: ComentarioCriacaoDto): Observable<any> {
     return this.http.post(`${this.apiUrl}/api/obras/${obraId}/Diarios/${diarioId}/comentarios`, comentario);

@@ -105,12 +105,7 @@
     </div>
 
     <div *ngIf="currentTab === 'Diário'" class="detail-section">
-      <app-diario-list
-        [obraId]="obra.id!"
-        [diarios]="obra.diariosObra || []"
-        (diarioAdded)="refreshDiarios()"
-        (diarioDeleted)="refreshDiarios()">
-      </app-diario-list>
+        <app-diario-list [obraId]="obraId!" [diarios]="diariosListagem" (diarioAdded)="refreshDiarios()" (diarioDeleted)="refreshDiarios()"></app-diario-list>
     </div>
 
     <div *ngIf="currentTab === 'Documentos'" class="detail-section">

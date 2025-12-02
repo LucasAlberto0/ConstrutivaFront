@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ObraService } from '../../shared/obra.service';
-import { ObraDetalhesDto, ObraStatus, ManutencaoDto } from '../../shared/models/obra.model';
+import { ObraDetalhesDto, ObraStatus, ManutencaoDto, DiarioObraDto } from '../../shared/models/obra.model';
 import { ManutencaoListagemDto } from '../../shared/models/manutencao.model';
+import { Clima, DiarioObraListagemDto } from '../../shared/models/diario.model';
 import { ManutencaoListComponent } from '../manutencoes/manutencao-list/manutencao-list.component';
 import { DiarioListComponent } from '../diarios/diario-list/diario-list.component';
 import { DocumentoListComponent } from '../documentos/documento-list/documento-list.component';
@@ -31,6 +32,7 @@ export class ObraDetailComponent implements OnInit {
   currentTab: string = 'Dados Básicos'; 
   progress: number = 0; 
   canEditObra: boolean = false; 
+  diariosListagem: DiarioObraListagemDto[] = []; // Added property
 
   constructor(
     private route: ActivatedRoute,
@@ -72,6 +74,17 @@ export class ObraDetailComponent implements OnInit {
             hasFoto: manutencao.hasFoto || false,
             obraId: this.obraId!, // Assuming obraId is always available here
             nomeObra: this.obra?.nome || '' // Assuming obra name is available
+          }));
+        }
+
+        // Map DiarioObraDto[] to DiarioObraListagemDto[]
+        if (this.obra && this.obra.diariosObra) {
+          this.diariosListagem = this.obra.diariosObra.map((diario: DiarioObraDto) => ({
+            id: diario.id!,
+            data: diario.data || '',
+            clima: diario.clima as Clima, // Cast to Clima enum
+            obraId: this.obraId!,
+            nomeObra: this.obra?.nome || ''
           }));
         }
         

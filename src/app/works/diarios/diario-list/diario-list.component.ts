@@ -2,9 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DiarioService } from '../../../shared/diario.service';
-import { DiarioObraListagemDto, DiarioObraCriacaoDto, ComentarioCriacaoDto } from '../../../shared/models/diario.model';
-import { FotoDiarioDto } from '../../../shared/models/foto-diario.model';
-import { ComentarioDto } from '../../../shared/models/comentario.model';
+import { DiarioObraListagemDto, DiarioObraCriacaoDto, ComentarioCriacaoDto, Clima } from '../../../shared/models/diario.model';
 import { AuthService } from '../../../shared/auth.service'; // Added import
 
 @Component({
@@ -20,18 +18,22 @@ export class DiarioListComponent implements OnInit {
   @Output() diarioAdded = new EventEmitter<void>();
   @Output() diarioDeleted = new EventEmitter<void>();
 
+  climaOptions: Clima[] = ['Ensolarado', 'Nublado', 'Chuvoso', 'ParcialmenteNublado', 'Tempestade'];
+
   newDiario: DiarioObraCriacaoDto = {
     data: new Date().toISOString(),
-    clima: '',
-    colaboradores: '',
-    atividades: '',
+    clima: 'Ensolarado', // Default value
+    quantidadeColaboradores: 0,
+    descricaoAtividades: '',
+    observacoes: '',
     obraId: 0,
-    fotosUrls: [],
+    foto: undefined,
     comentarios: []
   };
-  newFotoUrl: string = '';
+  selectedFile: File | undefined;
   newComentarioTexto: string = '';
   currentDiarioDetalhes: any = null; // To store details of a selected diario
+  currentDiarioPhotoUrl: string | undefined; // To store the URL of the photo
   loading: boolean = false;
   error: string | null = null;
   canManageDiarios: boolean = false; // Added property
@@ -43,25 +45,41 @@ export class DiarioListComponent implements OnInit {
     this.canManageDiarios = this.authService.hasRole(['Admin', 'Fiscal']); // Initialize canManageDiarios
   }
 
+  onFileSelected(event: any): void {
+    if (event.target.files && event.target.files.length > 0) {
+      this.selectedFile = event.target.files[0];
+    } else {
+      this.selectedFile = undefined;
+    }
+  }
+
   addDiario(): void {
-    if (!this.newDiario.data) {
-      this.error = 'Data é obrigatória para o diário.';
+    if (!this.newDiario.data || !this.newDiario.clima || !this.newDiario.descricaoAtividades) {
+      this.error = 'Data, Clima e Atividades são obrigatórios para o diário.';
       return;
     }
 
     this.loading = true;
     this.error = null;
-    this.diarioService.createDiario(this.obraId, this.newDiario).subscribe({
+
+    const diarioToCreate: DiarioObraCriacaoDto = {
+      ...this.newDiario,
+      foto: this.selectedFile
+    };
+
+    this.diarioService.createDiario(this.obraId, diarioToCreate).subscribe({
       next: () => {
         this.newDiario = {
-          data: new Date().toISOString(),
-          clima: '',
-          colaboradores: '',
-          atividades: '',
+          data: new Date().toISOString().split('T')[0],
+          clima: 'Ensolarado',
+          quantidadeColaboradores: 0,
+          descricaoAtividades: '',
+          observacoes: '',
           obraId: this.obraId,
-          fotosUrls: [],
+          foto: undefined,
           comentarios: []
         };
+        this.selectedFile = undefined;
         this.diarioAdded.emit();
         this.loading = false;
       },
@@ -98,9 +116,23 @@ export class DiarioListComponent implements OnInit {
 
     this.loading = true;
     this.error = null;
+    this.currentDiarioPhotoUrl = undefined; // Clear previous photo
+
     this.diarioService.getDiarioById(this.obraId, diarioId).subscribe({
       next: (details) => {
         this.currentDiarioDetalhes = details;
+        if (details.hasFoto) {
+          this.diarioService.getDiarioPhoto(this.obraId, diarioId).subscribe({
+            next: (photoBlob) => {
+              const objectURL = URL.createObjectURL(photoBlob);
+              this.currentDiarioPhotoUrl = objectURL;
+            },
+            error: (photoErr) => {
+              console.error('Erro ao carregar foto do diário:', photoErr);
+              this.error = 'Falha ao carregar foto do diário.';
+            }
+          });
+        }
         this.loading = false;
       },
       error: (err) => {
@@ -113,49 +145,13 @@ export class DiarioListComponent implements OnInit {
 
   closeDiarioDetails(): void {
     this.currentDiarioDetalhes = null;
-  }
-
-  addFoto(diarioId: number | undefined): void {
-    if (!diarioId || !this.newFotoUrl) {
-      this.error = 'URL da foto é obrigatória.';
-      return;
+    if (this.currentDiarioPhotoUrl) {
+      URL.revokeObjectURL(this.currentDiarioPhotoUrl); // Clean up the object URL
+      this.currentDiarioPhotoUrl = undefined;
     }
-
-    this.loading = true;
-    this.error = null;
-    this.diarioService.addFotoToDiario(this.obraId, diarioId, this.newFotoUrl).subscribe({
-      next: () => {
-        this.newFotoUrl = '';
-        this.viewDiarioDetails(diarioId); // Refresh details
-        this.loading = false;
-      },
-      error: (err) => {
-        this.error = 'Falha ao adicionar foto.';
-        this.loading = false;
-        console.error('Erro ao adicionar foto:', err);
-      }
-    });
   }
 
-  deleteFoto(diarioId: number | undefined, fotoId: number | undefined): void {
-    if (!diarioId || !fotoId || !confirm('Tem certeza que deseja excluir esta foto?')) {
-      return;
-    }
-
-    this.loading = true;
-    this.error = null;
-    this.diarioService.deleteFotoFromDiario(this.obraId, diarioId, fotoId).subscribe({
-      next: () => {
-        this.viewDiarioDetails(diarioId); // Refresh details
-        this.loading = false;
-      },
-      error: (err) => {
-        this.error = 'Falha ao excluir foto.';
-        this.loading = false;
-        console.error('Erro ao excluir foto:', err);
-      }
-    });
-  }
+  // Removed addFoto and deleteFoto methods as per new API spec
 
   addComentario(diarioId: number | undefined): void {
     if (!diarioId || !this.newComentarioTexto) {
