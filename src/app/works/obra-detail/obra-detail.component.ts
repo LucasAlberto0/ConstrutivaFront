@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ObraService } from '../../shared/obra.service';
-import { ObraDetalhesDto, ObraStatus } from '../../shared/models/obra.model';
+import { ObraDetalhesDto, ObraStatus, ManutencaoDto } from '../../shared/models/obra.model';
+import { ManutencaoListagemDto } from '../../shared/models/manutencao.model';
 import { ManutencaoListComponent } from '../manutencoes/manutencao-list/manutencao-list.component';
 import { DiarioListComponent } from '../diarios/diario-list/diario-list.component';
 import { DocumentoListComponent } from '../documentos/documento-list/documento-list.component';
@@ -60,6 +61,18 @@ export class ObraDetailComponent implements OnInit {
           this.obra = response.data;
         } else {
           this.obra = response;
+        }
+
+        // Map ManutencaoDto[] to ManutencaoListagemDto[]
+        if (this.obra && this.obra.manutencoes) {
+          this.obra.manutencoes = this.obra.manutencoes.map((manutencao: ManutencaoDto) => ({
+            id: manutencao.id!, // Assert that id will be a number
+            dataManutencao: manutencao.dataManutencao || '',
+            descricao: manutencao.descricao || '',
+            hasFoto: manutencao.hasFoto || false,
+            obraId: this.obraId!, // Assuming obraId is always available here
+            nomeObra: this.obra?.nome || '' // Assuming obra name is available
+          }));
         }
         
         setTimeout(() => {

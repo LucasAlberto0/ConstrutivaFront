@@ -8,20 +8,16 @@
     <h4>Adicionar Nova Manutenção</h4>
     <form (ngSubmit)="addManutencao()">
       <div class="form-group">
-        <label for="dataInicio">Data de Início</label>
-        <input type="date" id="dataInicio" name="dataInicio" [(ngModel)]="newManutencao.dataInicio" required>
+        <label for="dataManutencao">Data da Manutenção</label>
+        <input type="date" id="dataManutencao" name="dataManutencao" [(ngModel)]="newManutencao.dataManutencao" required>
       </div>
       <div class="form-group">
-        <label for="dataTermino">Data de Término</label>
-        <input type="date" id="dataTermino" name="dataTermino" [(ngModel)]="newManutencao.dataTermino" required>
+        <label for="descricao">Descrição</label>
+        <textarea id="descricao" name="descricao" [(ngModel)]="newManutencao.descricao" rows="3" required></textarea>
       </div>
       <div class="form-group">
-        <label for="imagemUrl">URL da Imagem (Opcional)</label>
-        <input type="text" id="imagemUrl" name="imagemUrl" [(ngModel)]="newManutencao.imagemUrl">
-      </div>
-      <div class="form-group">
-        <label for="datasManutencao">Datas das Manutenções (Ex: 01/01, 15/01)</label>
-        <input type="text" id="datasManutencao" name="datasManutencao" [(ngModel)]="newManutencao.datasManutencao">
+        <label for="foto">Foto (Opcional)</label>
+        <input type="file" id="foto" name="foto" (change)="onFileSelected($event)">
       </div>
       <button type="submit" class="btn-primary">Adicionar Manutenção</button>
     </form>
@@ -30,18 +26,30 @@
   <div *ngIf="manutencoes && manutencoes.length > 0" class="card manutencoes-display">
     <h4>Manutenções Registradas</h4>
     <ul>
-      <li *ngFor="let manutencao of manutencoes">
-        <span>
-          De {{ manutencao.dataInicio | date:'shortDate' }} até {{ manutencao.dataTermino | date:'shortDate' }}
-          <span *ngIf="manutencao.datasManutencao"> (Datas: {{ manutencao.datasManutencao }})</span>
-          <span *ngIf="manutencao.imagemUrl"> | <a [href]="manutencao.imagemUrl" target="_blank">Ver Imagem</a></span>
-        </span>
-        <button *ngIf="canManageManutencoes" (click)="deleteManutencao(manutencao.id)" class="btn-danger">Excluir</button>
+      <li *ngFor="let manutencao of manutencoes" class="manutencao-item-card">
+        <div class="manutencao-details">
+          <p><strong>Data:</strong> {{ manutencao.dataManutencao | date:'shortDate' }}</p>
+          <p><strong>Descrição:</strong> {{ manutencao.descricao }}</p>
+          <div *ngIf="manutencao.hasFoto" class="manutencao-photo">
+            <img [src]="getManutencaoPhotoUrl(manutencao.id)" alt="Foto da Manutenção" (click)="openImageModal(getManutencaoPhotoUrl(manutencao.id))">
+          </div>
+        </div>
+        <div class="manutencao-actions">
+          <button *ngIf="canManageManutencoes" (click)="deleteManutencao(manutencao.id)" class="btn-danger">Excluir</button>
+        </div>
       </li>
     </ul>
   </div>
 
   <div *ngIf="!manutencoes || manutencoes.length === 0 && !loading" class="no-data-message">
     Nenhuma manutenção registrada para esta obra.
+  </div>
+</div>
+
+<!-- Image Modal Structure -->
+<div *ngIf="showModal" class="image-modal-overlay" (click)="closeImageModal()">
+  <div class="image-modal-content" (click)="$event.stopPropagation()">
+    <span class="close-button" (click)="closeImageModal()">&times;</span>
+    <img [src]="modalImageUrl" alt="Imagem Ampliada">
   </div>
 </div>

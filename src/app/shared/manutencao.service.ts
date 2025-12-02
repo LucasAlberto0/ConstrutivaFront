@@ -20,15 +20,19 @@ export class ManutencaoService {
     return this.http.get<ManutencaoDetalhesDto>(`${this.apiUrl}/api/obras/${obraId}/Manutencoes/${id}`);
   }
 
-  createManutencao(obraId: number, manutencao: ManutencaoCriacaoDto): Observable<ManutencaoDetalhesDto> {
-    return this.http.post<ManutencaoDetalhesDto>(`${this.apiUrl}/api/obras/${obraId}/Manutencoes`, manutencao);
+  createManutencao(obraId: number, formData: FormData): Observable<ManutencaoDetalhesDto> {
+    return this.http.post<ManutencaoDetalhesDto>(`${this.apiUrl}/api/obras/${obraId}/manutencoes`, formData);
   }
 
-  updateManutencao(obraId: number, id: number, manutencao: ManutencaoAtualizacaoDto): Observable<any> {
-    return this.http.put(`${this.apiUrl}/api/obras/${obraId}/Manutencoes/${id}`, manutencao);
+  updateManutencao(obraId: number, id: number, formData: FormData): Observable<any> {
+    return this.http.put(`${this.apiUrl}/api/obras/${obraId}/manutencoes/${id}`, formData);
+  }
+
+  getManutencaoPhotoUrl(obraId: number, manutencaoId: number): string {
+    return `${this.apiUrl}/api/obras/${obraId}/manutencoes/${manutencaoId}/foto`;
   }
 
   deleteManutencao(obraId: number, id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/api/obras/${obraId}/Manutencoes/${id}`);
+    return this.http.delete(`${this.apiUrl}/api/obras/${obraId}/manutencoes/${id}`);
   }
 }

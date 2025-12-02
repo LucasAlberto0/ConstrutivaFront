@@ -1,34 +1,30 @@
 export interface ManutencaoListagemDto {
-  id?: number;
-  dataInicio?: string;
-  dataTermino?: string;
-  imagemUrl?: string;
-  datasManutencao?: string;
-  obraId?: number;
-  nomeObra?: string;
+  id: number;
+  dataManutencao: string;
+  descricao: string;
+  hasFoto: boolean;
+  obraId: number;
+  nomeObra: string;
 }
 
 export interface ManutencaoCriacaoDto {
-  dataInicio: string;
-  dataTermino: string;
-  imagemUrl?: string;
-  datasManutencao?: string;
+  dataManutencao: string;
+  descricao: string;
   obraId: number;
+  // Foto will be handled as File object in FormData
 }
 
 export interface ManutencaoAtualizacaoDto {
-  dataInicio: string;
-  dataTermino: string;
-  imagemUrl?: string;
-  datasManutencao?: string;
+  dataManutencao: string;
+  descricao: string;
+  // Foto will be handled as File object in FormData
 }
 
 export interface ManutencaoDetalhesDto {
-  id?: number;
-  dataInicio?: string;
-  dataTermino?: string;
-  imagemUrl?: string;
-  datasManutencao?: string;
-  obraId?: number;
-  nomeObra?: string;
+  id: number;
+  dataManutencao: string;
+  descricao: string;
+  hasFoto: boolean;
+  obraId: number;
+  nomeObra: string;
 }

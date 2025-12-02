@@ -53,10 +53,9 @@ export interface AditivoDto {
 
 export interface ManutencaoDto {
   id?: number;
-  dataInicio?: string;
-  dataTermino?: string;
-  imagemUrl?: string;
-  datasManutencao?: string;
+  dataManutencao?: string;
+  descricao?: string;
+  hasFoto?: boolean;
 }
 
 export interface DiarioObraDto {
@@ -92,6 +91,8 @@ export interface ChecklistDto {
   itens?: ChecklistItemDto[];
 }
 
+import { ManutencaoListagemDto } from './manutencao.model'; // Import ManutencaoListagemDto
+
 export interface ObraDetalhesDto {
   id?: number;
   nome?: string;
@@ -108,12 +109,11 @@ export interface ObraDetalhesDto {
   status?: ObraStatus;
   observacoes?: string;
   aditivos?: AditivoDto[];
-  manutencoes?: ManutencaoDto[];
+  manutencoes?: ManutencaoListagemDto[]; // Changed to ManutencaoListagemDto[]
   diariosObra?: DiarioObraDto[];
   documentos?: DocumentoDto[];
   checklists?: ChecklistDto[];
 }
-
 export enum TipoPasta {
   Contratos = 0,
   Projetos = 1,
