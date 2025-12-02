@@ -45,5 +45,4 @@ export interface DiarioObraDetalhesDto {
 
 export interface ComentarioCriacaoDto {
   texto: string;
-  autorId: string; // ID do usuário que está criando o comentário
 }

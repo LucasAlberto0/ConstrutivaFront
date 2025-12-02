@@ -86,8 +86,9 @@
     <canvas id="statusChart"></canvas>
   </div>
 
-  <ng-container *ngIf="dashboardSummary?.obrasRecentes as obrasRecentes">
-    <div *ngIf="obrasRecentes.length > 0" class="card recent-works">
+  <ng-container *ngIf="dashboardSummary?.obrasRecentes as obrasRecentes" >
+    <div *ngIf="obrasRecentes.length > 0" class="card recent-works" data-aos="zoom-in"
+      data-aos-duration="1500">
       <div class="main-title">
         <div>
           <h2>Obras Recentes</h2>

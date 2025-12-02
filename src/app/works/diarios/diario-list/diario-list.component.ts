@@ -2,7 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DiarioService } from '../../../shared/diario.service';
-import { DiarioObraListagemDto, DiarioObraCriacaoDto, ComentarioCriacaoDto, Clima } from '../../../shared/models/diario.model';
+import { DiarioObraListagemDto, DiarioObraCriacaoDto, ComentarioCriacaoDto, Clima, DiarioObraDetalhesDto } from '../../../shared/models/diario.model';
+import { ComentarioDto } from '../../../shared/models/comentario.model'; // Added import for ComentarioDto
 import { AuthService } from '../../../shared/auth.service'; // Added import
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'; // Import MatSnackBar
 
@@ -33,7 +34,7 @@ export class DiarioListComponent implements OnInit {
   };
   selectedFile: File | undefined;
   newComentarioTexto: string = '';
-  currentDiarioDetalhes: any = null; // To store details of a selected diario
+  currentDiarioDetalhes: DiarioObraDetalhesDto | null = null; // To store details of a selected diario
   currentDiarioPhotoUrl: string | undefined; // To store the URL of the photo
   loading: boolean = false;
   // error: string | null = null; // Removed error property
@@ -164,18 +165,21 @@ export class DiarioListComponent implements OnInit {
       return;
     }
 
-    // Assuming a dummy autorId for now, replace with actual user ID
     const comentario: ComentarioCriacaoDto = {
-      texto: this.newComentarioTexto,
-      autorId: 'dummy-user-id'
+      texto: this.newComentarioTexto
     };
 
     this.loading = true;
     // this.error = null; // Removed error assignment
     this.diarioService.addComentarioToDiario(this.obraId, diarioId, comentario).subscribe({
-      next: () => {
+      next: (newComment) => { // Expect newComment of type ComentarioDto
         this.newComentarioTexto = '';
-        this.viewDiarioDetails(diarioId); // Refresh details
+        if (this.currentDiarioDetalhes && this.currentDiarioDetalhes.comentarios) {
+          this.currentDiarioDetalhes.comentarios.push(newComment); // Add new comment to the array
+        } else if (this.currentDiarioDetalhes) {
+          this.currentDiarioDetalhes.comentarios = [newComment]; // Initialize if null
+        }
+        // this.viewDiarioDetails(diarioId); // No longer needed as we update the array directly
         this.loading = false;
         this.snackBar.open('Comentário adicionado com sucesso!', 'Fechar', { duration: 3000, panelClass: ['success-snackbar'], verticalPosition: 'top' });
       },

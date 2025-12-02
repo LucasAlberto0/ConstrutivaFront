@@ -62,7 +62,7 @@
     <div class="modal-content">
       <button class="btn-close" (click)="closeDiarioDetails()">X</button>
       <h4>Detalhes do Diário de {{ currentDiarioDetalhes.data | date:'dd/MM/yyyy' }}</h4>
-      <p><strong>Clima:</strong> {{ currentDiarioDetalhes.clima }}</p>
+      <p><strong>Clima:</strong> {{ getClimaName(currentDiarioDetalhes.clima) }}</p>
       <p><strong>Quantidade de Colaboradores:</strong> {{ currentDiarioDetalhes.quantidadeColaboradores }}</p>
       <p><strong>Atividades:</strong> {{ currentDiarioDetalhes.descricaoAtividades }}</p>
       <p *ngIf="currentDiarioDetalhes.observacoes"><strong>Observações:</strong> {{ currentDiarioDetalhes.observacoes }}</p>
@@ -74,16 +74,22 @@
       <p *ngIf="!currentDiarioPhotoUrl">Nenhuma foto.</p>
 
       <h5>Comentários</h5>
-      <div *ngIf="canManageDiarios" class="form-group">
-        <textarea [(ngModel)]="newComentarioTexto" placeholder="Novo comentário"></textarea>
-        <button (click)="addComentario(currentDiarioDetalhes.id)" class="btn-primary btn-small">Adicionar Comentário</button>
+      <div *ngIf="canManageDiarios" class="comment-input-area">
+        <textarea [(ngModel)]="newComentarioTexto" placeholder="Escreva um comentário..." rows="3"></textarea>
+        <button (click)="addComentario(currentDiarioDetalhes.id)" class="btn-add-comment"><img src="img/sendIcon.svg" alt=""> Comentar</button>
       </div>
-      <ul>
-        <li *ngFor="let comentario of currentDiarioDetalhes.comentarios">
-          <span><strong>{{ comentario.autorNome }}</strong> ({{ comentario.data | date:'short' }}): {{ comentario.texto }}</span>
-          <button *ngIf="canManageDiarios" (click)="deleteComentario(currentDiarioDetalhes.id, comentario.id)" class="btn-danger btn-small">X</button>
-        </li>
-      </ul>
+      <div class="comments-list">
+        <div *ngFor="let comentario of currentDiarioDetalhes.comentarios" class="comment-card">
+          <div class="comment-header">
+            <span class="comment-author"><strong>{{ comentario.autorNome }}</strong></span>
+            <span class="comment-date">{{ comentario.data | date:'dd/MM/yyyy HH:mm' }}</span>
+          </div>
+          <p class="comment-text">{{ comentario.texto }}</p>
+          <div class="comment-actions">
+            <button *ngIf="canManageDiarios" (click)="deleteComentario(currentDiarioDetalhes.id, comentario.id)" class="btn-delete-comment"><img src="img/trashIcon.svg" alt=""></button>
+          </div>
+        </div>
+      </div>
       <p *ngIf="!currentDiarioDetalhes.comentarios || currentDiarioDetalhes.comentarios.length === 0">Nenhum comentário.</p>
     </div>
   </div>

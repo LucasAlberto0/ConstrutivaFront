@@ -11,6 +11,9 @@ interface DecodedToken { // Define interface for decoded token
   role?: string; // Make role optional
   roles?: string | string[]; // Common claim for multiple roles
   'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'?: string | string[]; // Common Microsoft claim
+  sub?: string; // Added for user ID
+  nameid?: string; // Added for user ID
+  jti?: string; // Added for JWT ID
   [key: string]: any; // Allow for other potential claims
 }
 
@@ -131,5 +134,38 @@ export class AuthService {
       return userRole === roles;
     }
     return roles.includes(userRole);
+  }
+
+  getUserIdFromToken(): string | null {
+    const token = this.getToken();
+    if (token) {
+      try {
+        const decodedToken = jwtDecode<DecodedToken>(token);
+        console.log('AuthService: Decoded Token for User ID:', decodedToken); // Log decoded token
+        // The 'sub' claim typically holds the user ID
+        if (decodedToken.sub) {
+          console.log('AuthService: User ID (sub) found:', decodedToken.sub);
+          return decodedToken.sub;
+        } else {
+          console.log('AuthService: "sub" claim not found in token. Checking other common claims...');
+          // Check for other common claims that might hold the user ID
+          if (decodedToken.nameid) { // Common in some JWT implementations
+            console.log('AuthService: User ID (nameid) found:', decodedToken.nameid);
+            return decodedToken.nameid;
+          }
+          if (decodedToken.jti) { // JWT ID, sometimes used as user ID
+            console.log('AuthService: User ID (jti) found:', decodedToken.jti);
+            return decodedToken.jti;
+          }
+          console.log('AuthService: No common user ID claim found in token.');
+          return null;
+        }
+      } catch (Error) {
+        console.error('AuthService: Error decoding token for user ID:', Error);
+        return null;
+      }
+    }
+    console.log('AuthService: No token found for getUserIdFromToken.'); // Log if no token
+    return null;
   }
 }
