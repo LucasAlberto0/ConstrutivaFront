@@ -30,7 +30,8 @@
   <div *ngIf="loading" class="loading-message">Carregando detalhes da obra...</div>
   <div *ngIf="error" class="error-message">{{ error }}</div>
 
-  <div *ngIf="obra && !loading" class="card obra-details-card">
+  <div *ngIf="obra && !loading" class="card obra-details-card" data-aos="zoom-in"
+  data-aos-duration="1500">
     <div *ngIf="currentTab === 'Dados Básicos'" class="detail-section">
       <h3>Dados Básicos</h3>
       <div class="info-box">
@@ -83,11 +84,11 @@
       <h3>Status dos Serviços</h3>
       <div class="info-box">
         <p><img src="img/redIcons/calendarIconRed.svg" alt="Data de Início"> <strong>Data de Início:</strong></p>
-        <p>{{ obra.dataInicio | date:'shortDate' }}</p>
+        <p>{{ obra.dataInicio | date:'dd/MM/yyyy' }}</p>
       </div>
       <div class="info-box">
         <p><img src="img/redIcons/calendarIconRed.svg" alt="Data de Término"> <strong>Data de Término:</strong></p>
-        <p>{{ obra.dataTermino | date:'shortDate' }}</p>
+        <p>{{ obra.dataTermino | date:'dd/MM/yyyy' }}</p>
       </div>
       <div class="info-box">
         <p><img src="img/redIcons/statusIconRed.svg" alt="Status"> <strong>Status:</strong></p>

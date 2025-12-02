@@ -3,13 +3,17 @@
 
   <div class="upload-area">
     <div class="upload-content">
-      <input type="file" (change)="onFileSelected($event)" #fileInput>
+      <div class="file-input-wrapper">
+        <input type="file" (change)="onFileSelected($event)" #fileInput hidden>
+        <button type="button" class="custom-file-button" (click)="fileInput.click()"><img src="img/uploadIcon.svg" alt=""> Escolher Arquivo</button>
+        <span class="file-name">{{ selectedFile ? selectedFile.name : 'Nenhum arquivo selecionado' }}</span>
+      </div>
       <select [(ngModel)]="selectedFolder" class="folder-select">
         <option value="" disabled selected>Selecione a pasta</option>
         <option value="Contratos">Contratos</option>
         <option value="Relatorios">Relatórios</option>        <option value="Diarios">Diários</option>
       </select>
-      <button class="btn-attach" (click)="onUpload()" [disabled]="!selectedFile">Anexar Documento</button>
+      <button class="btn-attach" (click)="onUpload()" [disabled]="!selectedFile"><img src="img/sendIcon.svg" alt=""> Anexar Documento</button>
       <div *ngIf="uploadProgress > 0 && uploadProgress < 100">
         Progresso do Upload: {{ uploadProgress }}%
       </div>
@@ -22,7 +26,7 @@
 
   <div *ngIf="documentos.length > 0; else noDocuments" class="document-folders">
     <div *ngFor="let folderName of (groupedDocuments | keyvalue)" class="folder-box">
-      <h3>{{ folderName.key }}</h3>
+      <h3><img src="img/redIcons/folderIcon.svg" alt="Folder Icon" class="folder-icon"> {{ folderName.key }}</h3>
       <div class="document-list">
         <div *ngFor="let documento of folderName.value" class="document-item">
           <div class="document-info">
@@ -31,7 +35,7 @@
             <span class="document-date">{{ documento.dataAnexamento | date:'shortDate' }}</span>
           </div>
           <div class="document-actions">
-            <button (click)="onDownload(documento)">Download</button>
+            <button (click)="onDownload(documento)"><img src="img/saveIcon.svg" alt=""> Download</button>
             <!-- Add other actions like edit/delete if needed -->
           </div>
         </div>

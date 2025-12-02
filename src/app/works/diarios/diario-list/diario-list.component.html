@@ -1,11 +1,11 @@
 <div class="diario-list-container">
-  <h3>Diário de Obra</h3>
+  <h2>Diário de Obra</h2>
 
   <div *ngIf="loading" class="loading-message">Processando...</div>
   <div *ngIf="error" class="error-message">{{ error }}</div>
 
   <div *ngIf="canManageDiarios" class="card diario-form">
-    <h4>Adicionar Novo Diário</h4>
+    <h3>Adicionar Novo Diário</h3>
     <form (ngSubmit)="addDiario()">
       <div class="form-group">
         <label for="data">Data</label>
@@ -31,9 +31,13 @@
       </div>
       <div class="form-group">
         <label for="foto">Foto (Opcional)</label>
-        <input type="file" id="foto" name="foto" (change)="onFileSelected($event)">
+        <div class="file-input-wrapper">
+          <input type="file" id="foto" name="foto" (change)="onFileSelected($event)" #fileInput hidden>
+          <button type="button" class="custom-file-button" (click)="fileInput.click()"><img src="img/uploadIcon.svg" alt=""> Escolher Arquivo</button>
+          <span class="file-name">{{ newDiario.foto ? newDiario.foto.name : 'Nenhum arquivo selecionado' }}</span>
+        </div>
       </div>
-      <button type="submit" class="btn-primary">Adicionar Diário</button>
+      <button type="submit" class="btn-primary"><img src="img/plusIcon.svg" alt=""> Adicionar Diário</button>
     </form>
   </div>
 

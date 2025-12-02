@@ -48,8 +48,10 @@ export class DiarioListComponent implements OnInit {
   onFileSelected(event: any): void {
     if (event.target.files && event.target.files.length > 0) {
       this.selectedFile = event.target.files[0];
+      this.newDiario.foto = this.selectedFile;
     } else {
       this.selectedFile = undefined;
+      this.newDiario.foto = undefined;
     }
   }
 

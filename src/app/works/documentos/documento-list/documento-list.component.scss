@@ -59,15 +59,59 @@ h3 {
   gap: 1rem;
 }
 
+.file-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.custom-file-button {
+  background-color: #050505;
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  img {
+    width: 18px;
+    height: 18px;
+    filter: brightness(0) invert(1);
+  }
+
+  &:hover {
+    background-color: #747070;
+  }
+}
+
+.file-name {
+  font-size: 0.9rem;
+  color: #555;
+}
+
 .btn-attach {
   background-color: #e53935; /* Red */
   color: #fff;
   padding: 0.8rem 1.5rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px; /* Changed from 4px to 8px */
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  display: flex; /* Added for icon alignment */
+  align-items: center; /* Added for icon alignment */
+  gap: 8px; /* Added for spacing between icon and text */
+
+  img {
+    width: 18px; /* Style for the icon */
+    height: 18px; /* Style for the icon */
+    filter: brightness(0) invert(1); /* Make the icon white */
+  }
 }
 
 .btn-attach:hover {
@@ -107,7 +151,7 @@ h3 {
   width: 100%;
   padding: 0.8rem;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 8px; /* Changed from 4px to 8px */
   box-sizing: border-box;
   font-size: 1rem;
 }
@@ -275,6 +319,15 @@ h3 {
   text-align: left;
   border-bottom: 2px solid #e53935;
   padding-bottom: 0.5rem;
+  display: flex; /* Added for icon alignment */
+  align-items: center; /* Added for icon alignment */
+  gap: 10px; /* Added for spacing between icon and text */
+}
+
+.folder-icon {
+  width: 24px; /* Adjust size as needed */
+  height: 24px; /* Adjust size as needed */
+  filter: invert(20%) sepia(90%) saturate(700%) hue-rotate(330deg) brightness(90%) contrast(90%); /* To make it red */
 }
 
 .folder-box table {
@@ -375,18 +428,27 @@ h3 {
 }
 
 .document-actions button {
-  background-color: #007bff; /* Blue for download */
+  background-color: #000; /* Changed to black */
   color: white;
   padding: 0.5rem 1rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px; /* Changed from 4px to 8px */
   cursor: pointer;
   font-size: 0.85rem;
   transition: background-color 0.3s ease;
+  display: flex; /* Added for icon alignment */
+  align-items: center; /* Added for icon alignment */
+  gap: 5px; /* Added for spacing between icon and text */
+
+  img {
+    width: 16px; /* Style for the icon */
+    height: 16px; /* Style for the icon */
+    filter: brightness(0) invert(1); /* Make the icon white */
+  }
 }
 
 .document-actions button:hover {
-  background-color: #0056b3; /* Darker blue */
+  background-color: #333; /* Darker black on hover */
 }
 
 /* Responsive adjustments for document items */

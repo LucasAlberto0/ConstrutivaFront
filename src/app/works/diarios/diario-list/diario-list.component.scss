@@ -66,15 +66,77 @@ h3 {
   color: #555;
 }
 
-.form-group input[type="text"],
 .form-group input[type="date"],
-.form-group textarea {
+.form-group input[type="number"],
+.form-group textarea,
+.form-group select {
   width: 100%;
   padding: 0.8rem;
   border: 1px solid #ddd;
   border-radius: 4px;
   box-sizing: border-box;
   font-size: 1rem;
+}
+
+.file-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.custom-file-button {
+  background-color: #050505;
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 8px; /* Changed from 4px to 8px as per user request */
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  display: flex; /* Added for icon alignment */
+  align-items: center; /* Added for icon alignment */
+
+  gap: 8px; /* Added for spacing between icon and text */
+
+  img {
+    width: 18px; /* Style for the icon */
+    height: 18px; /* Style for the icon */
+    filter: brightness(0) invert(1); /* Make the icon white */
+  }
+
+  &:hover {
+    background-color: #515151;
+  }
+}
+
+.file-name {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.btn-primary {
+  background-color: #e53935;
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  display: flex; /* Added for icon alignment */
+  align-items: center; /* Added for icon alignment */
+  gap: 8px; /* Added for spacing between icon and text */
+  justify-content: center; /* Center content */
+
+  img {
+    width: 18px; /* Style for the icon */
+    height: 18px; /* Style for the icon */
+    filter: brightness(0) invert(1); /* Make the icon white */
+  }
+
+  &:hover {
+    background-color: #c62828;
+  }
 }
 
 .diarios-display {
