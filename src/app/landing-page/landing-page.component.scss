@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // --- 1. Variáveis ---
 $color-primary: #ED213C;
 $color-dark: #333;
@@ -56,7 +58,7 @@ p {
     font-size: 0.9em;
 
     &:hover {
-        background-color: darken($color-primary, 10%);
+        background-color: color.adjust($color-primary, $lightness: -10%);
     }
 }
 
@@ -123,7 +125,7 @@ hr {
 
     .tag-sistema {
         display: inline-block;
-        background-color: lighten($color-primary, 35%);
+        background-color: color.adjust($color-primary, $lightness: 35%);
         color: $color-primary;
         font-size: 0.8em;
         font-weight: 600;
