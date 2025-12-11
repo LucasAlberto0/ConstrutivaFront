@@ -17,9 +17,9 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
-    "baseUrl": "./", // Add baseUrl
+    "baseUrl": "./", 
     "paths": {
-      "@shared/*": ["src/app/shared/*"] // Add path alias for shared modules
+      "@shared/*": ["src/app/shared/*"] 
     }
   },
   "angularCompilerOptions": {

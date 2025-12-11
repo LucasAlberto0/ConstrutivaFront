@@ -4,12 +4,12 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ObraService } from '../../shared/obra.service';
 import { AuthService } from '../../shared/auth.service';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'; // Import MatSnackBar and MatSnackBarModule
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-obra-create',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, MatSnackBarModule], // Add MatSnackBarModule
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, MatSnackBarModule],
   templateUrl: './obra-create.component.html',
   styleUrls: ['./obra-create.component.scss']
 })
@@ -29,7 +29,7 @@ export class ObraCreateComponent {
     private obraService: ObraService,
     private router: Router,
     private authService: AuthService,
-    private _snackBar: MatSnackBar // Inject MatSnackBar
+    private _snackBar: MatSnackBar
   ) {
     this.obraForm = this.fb.group({
       nome: ['', Validators.required],

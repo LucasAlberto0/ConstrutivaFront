@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '@shared/auth.service';
 import { UserInfo } from '@shared/models/user.model';
 import { environment } from '../../environments/environment';
-import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'; // Import HttpHeaders
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 
 interface Message {
   text: string;
@@ -16,7 +16,7 @@ interface DaiApiResponse {
   id: string;
   messageServiceId: string;
   message: string;
-  response: string; // Updated to 'response'
+  response: string; 
 }
 
 @Component({
@@ -35,9 +35,9 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
   userProfilePicUrl: string | undefined;
   isLoading: boolean = false;
   private userId: string | undefined;
-  private username: string | undefined; // To store the logged-in user's name
+  private username: string | undefined;
   private readonly DAI_API_KEY = 'qy0WXuJeO2YpOqu4oxUkpXmppP2dR52MkadTg9GqFvfh0iyNxrsyS98sPssUt2Dy';
-  private readonly DAI_API_ENDPOINT = 'https://api.dai.tec.br/v1/chats'; // Updated endpoint
+  private readonly DAI_API_ENDPOINT = 'https://api.dai.tec.br/v1/chats'; 
   private readonly LOCAL_STORAGE_KEY = 'chatbot_messages';
 
   constructor(
@@ -46,7 +46,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
   ) { }
 
   ngOnInit(): void {
-    this.loadMessages(); // Load messages from localStorage
+    this.loadMessages(); 
 
     if (this.messages.length === 0) {
       this.messages.push({
@@ -59,7 +59,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
     this.authService.getMe().subscribe({
       next: (userInfo: UserInfo) => {
         this.userId = userInfo.id;
-        this.username = userInfo.nomeCompleto; // Store the username
+        this.username = userInfo.nomeCompleto; 
         if (userInfo.profilePictureUrl) {
           this.userProfilePicUrl = this._getProfilePictureFullUrl(userInfo.profilePictureUrl);
         } else {
@@ -94,7 +94,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
         timestamp: new Date(),
         isUser: true
       });
-      this.saveMessages(); // Save messages after user sends one
+      this.saveMessages();
       this.newMessage = '';
       this.isLoading = true;
       this.sendToDaiAssistant(userMessage);
@@ -110,7 +110,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
         isUser: false
       });
       this.isLoading = false;
-      this.saveMessages(); // Save messages after error
+      this.saveMessages(); 
       return;
     }
 
@@ -133,7 +133,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
           timestamp: new Date(),
           isUser: false
         });
-        this.saveMessages(); // Save messages after assistant responds
+        this.saveMessages(); 
       },
       error: (err) => {
         this.isLoading = false;
@@ -143,7 +143,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
           timestamp: new Date(),
           isUser: false
         });
-        this.saveMessages(); // Save messages after error
+        this.saveMessages(); 
       }
     });
   }
@@ -163,7 +163,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
     if (storedMessages) {
       this.messages = JSON.parse(storedMessages).map((msg: Message) => ({
         ...msg,
-        timestamp: new Date(msg.timestamp) // Convert timestamp string back to Date object
+        timestamp: new Date(msg.timestamp) 
       }));
     }
   }

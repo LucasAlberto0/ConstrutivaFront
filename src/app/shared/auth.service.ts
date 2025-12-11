@@ -5,16 +5,16 @@ import { tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { LoginDto, RegisterDto } from './models/auth.model';
 import { UserInfo } from './models/user.model';
-import { jwtDecode } from 'jwt-decode'; // Added import
+import { jwtDecode } from 'jwt-decode';
 
-interface DecodedToken { // Define interface for decoded token
-  role?: string; // Make role optional
-  roles?: string | string[]; // Common claim for multiple roles
-  'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'?: string | string[]; // Common Microsoft claim
-  sub?: string; // Added for user ID
-  nameid?: string; // Added for user ID
-  jti?: string; // Added for JWT ID
-  [key: string]: any; // Allow for other potential claims
+interface DecodedToken {
+  role?: string;
+  roles?: string | string[];
+  'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'?: string | string[];
+  sub?: string;
+  nameid?: string;
+  jti?: string;
+  [key: string]: any;
 }
 
 @Injectable({
@@ -23,24 +23,24 @@ interface DecodedToken { // Define interface for decoded token
 export class AuthService {
   private apiUrl = environment.apiUrl;
   private tokenKey = 'jwt_token';
-  private roleKey = 'user_role'; // Added roleKey
+  private roleKey = 'user_role';
   private _isAuthenticated = new BehaviorSubject<boolean>(this.hasToken());
-  private _userRole = new BehaviorSubject<string | null>(this.getRoleFromToken()); // Modified to get role from token
+  private _userRole = new BehaviorSubject<string | null>(this.getRoleFromToken());
 
   isAuthenticated$ = this._isAuthenticated.asObservable();
-  userRole$ = this._userRole.asObservable(); // Expose user role as observable
+  userRole$ = this._userRole.asObservable();
 
   constructor(private http: HttpClient) { }
 
-  login(credentials: LoginDto): Observable<{ token: string, role: string }> { // Updated response type
-    return this.http.post<{ token: string, role: string }>(`${this.apiUrl}/api/Auth/login`, credentials).pipe( // Updated response type
+  login(credentials: LoginDto): Observable<{ token: string, role: string }> {
+    return this.http.post<{ token: string, role: string }>(`${this.apiUrl}/api/Auth/login`, credentials).pipe(
       tap(response => {
         this.setToken(response.token);
-        const decodedToken = jwtDecode<DecodedToken>(response.token); // Decode token
-        const extractedRole = this.extractRoleFromDecodedToken(decodedToken); // Helper to extract role
-        this.setRole(extractedRole || null); // Store role from token, or null if not found
+        const decodedToken = jwtDecode<DecodedToken>(response.token);
+        const extractedRole = this.extractRoleFromDecodedToken(decodedToken);
+        this.setRole(extractedRole || null);
         this._isAuthenticated.next(true);
-        this._userRole.next(extractedRole || null); // Update role subject
+        this._userRole.next(extractedRole || null);
       })
     );
   }
@@ -73,7 +73,7 @@ export class AuthService {
     localStorage.setItem(this.tokenKey, token);
   }
 
-  private setRole(role: string | null): void { // Added setRole
+  private setRole(role: string | null): void {
     if (role) {
       localStorage.setItem(this.roleKey, role);
     } else {
@@ -93,11 +93,11 @@ export class AuthService {
     return role;
   }
 
-  getRole(): string | null { // Modified getRole
+  getRole(): string | null {
     return this.getRoleFromToken();
   }
 
-  private getRoleFromToken(): string | null { // Added getRoleFromToken
+  private getRoleFromToken(): string | null {
     const token = this.getToken();
     if (token) {
       try {
@@ -117,7 +117,7 @@ export class AuthService {
 
   private removeToken(): void {
     localStorage.removeItem(this.tokenKey);
-    localStorage.removeItem(this.roleKey); // Also remove role on logout
+    localStorage.removeItem(this.roleKey);
   }
 
   private hasToken(): boolean {
@@ -141,19 +141,17 @@ export class AuthService {
     if (token) {
       try {
         const decodedToken = jwtDecode<DecodedToken>(token);
-        console.log('AuthService: Decoded Token for User ID:', decodedToken); // Log decoded token
-        // The 'sub' claim typically holds the user ID
+        console.log('AuthService: Decoded Token for User ID:', decodedToken);
         if (decodedToken.sub) {
           console.log('AuthService: User ID (sub) found:', decodedToken.sub);
           return decodedToken.sub;
         } else {
           console.log('AuthService: "sub" claim not found in token. Checking other common claims...');
-          // Check for other common claims that might hold the user ID
-          if (decodedToken.nameid) { // Common in some JWT implementations
+          if (decodedToken.nameid) {
             console.log('AuthService: User ID (nameid) found:', decodedToken.nameid);
             return decodedToken.nameid;
           }
-          if (decodedToken.jti) { // JWT ID, sometimes used as user ID
+          if (decodedToken.jti) {
             console.log('AuthService: User ID (jti) found:', decodedToken.jti);
             return decodedToken.jti;
           }
@@ -165,7 +163,7 @@ export class AuthService {
         return null;
       }
     }
-    console.log('AuthService: No token found for getUserIdFromToken.'); // Log if no token
+    console.log('AuthService: No token found for getUserIdFromToken.');
     return null;
   }
 }

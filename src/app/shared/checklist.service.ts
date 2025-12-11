@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class ChecklistService {
-  private apiUrl = `${environment.apiUrl}/api/obras`; // Corrected API base URL
+  private apiUrl = `${environment.apiUrl}/api/obras`;
 
   constructor(private http: HttpClient) { }
 

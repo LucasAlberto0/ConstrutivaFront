@@ -6,7 +6,7 @@ import { DashboardService } from '../shared/dashboard.service';
 import { DashboardSummaryDto } from '../shared/models/dashboard.model';
 import { AuthService } from '../shared/auth.service';
 import { UserInfo } from '../shared/models/user.model';
-import { environment } from '../../environments/environment'; // Import environment
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -41,7 +41,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     if (!relativeUrl) {
       return undefined;
     }
-    // Ensure the base URL doesn't end with a slash and the relative URL starts with one
     const baseUrl = environment.apiUrl.endsWith('/') ? environment.apiUrl.slice(0, -1) : environment.apiUrl;
     const cleanRelativeUrl = relativeUrl.startsWith('/') ? relativeUrl : `/${relativeUrl}`;
     return `${baseUrl}${cleanRelativeUrl}`;
@@ -68,15 +67,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       this.uploadingPicture = true;
       this.authService.uploadProfilePicture(file).subscribe({
         next: (response) => {
-          // Backend now returns a message, not the URL.
-          // We need to force a refresh of the image by busting the cache.
           if (this.userInfo && this.userInfo.profilePictureUrl) {
-            // Remove any existing timestamp to avoid multiple timestamps
             let cleanUrl = this.userInfo.profilePictureUrl.split('?')[0];
             this.userInfo.profilePictureUrl = `${cleanUrl}?timestamp=${new Date().getTime()}`;
           } else if (this.userInfo) {
-            // If there was no profile picture before, we need to re-fetch user info
-            // to get the new relative URL from the backend.
             this.getUserInfo();
           }
           this.uploadingPicture = false;
@@ -84,7 +78,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         error: (err) => {
           console.error('Failed to upload profile picture:', err);
           this.uploadingPicture = false;
-          // Optionally: show an error message to the user
         }
       });
     }

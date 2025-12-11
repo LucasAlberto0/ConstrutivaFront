@@ -19,7 +19,7 @@ import { ChecklistsPageComponent } from '../checklists-page/checklists-page.comp
     ManutencaoListComponent,
     DiarioListComponent,
     DocumentoListComponent,
-    ChecklistsPageComponent // Add ChecklistsPageComponent here
+    ChecklistsPageComponent
   ],
   templateUrl: './obra-detail.component.html',
   styleUrls: ['./obra-detail.component.scss']
@@ -32,7 +32,7 @@ export class ObraDetailComponent implements OnInit {
   currentTab: string = 'Dados Básicos'; 
   progress: number = 0; 
   canEditObra: boolean = false; 
-  diariosListagem: DiarioObraListagemDto[] = []; // Added property
+  diariosListagem: DiarioObraListagemDto[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -65,24 +65,21 @@ export class ObraDetailComponent implements OnInit {
           this.obra = response;
         }
 
-        // Map ManutencaoDto[] to ManutencaoListagemDto[]
         if (this.obra && this.obra.manutencoes) {
           this.obra.manutencoes = this.obra.manutencoes.map((manutencao: ManutencaoDto) => ({
-            id: manutencao.id!, // Assert that id will be a number
+            id: manutencao.id!, 
             dataManutencao: manutencao.dataManutencao || '',
             descricao: manutencao.descricao || '',
             hasFoto: manutencao.hasFoto || false,
-            obraId: this.obraId!, // Assuming obraId is always available here
-            nomeObra: this.obra?.nome || '' // Assuming obra name is available
+            obraId: this.obraId!, 
+            nomeObra: this.obra?.nome || '' 
           }));
         }
-
-        // Map DiarioObraDto[] to DiarioObraListagemDto[]
         if (this.obra && this.obra.diariosObra) {
           this.diariosListagem = this.obra.diariosObra.map((diario: DiarioObraDto) => ({
             id: diario.id!,
             data: diario.data || '',
-            clima: diario.clima as Clima, // Cast to Clima enum
+            clima: diario.clima as Clima, 
             obraId: this.obraId!,
             nomeObra: this.obra?.nome || ''
           }));
@@ -171,8 +168,7 @@ export class ObraDetailComponent implements OnInit {
 
   navigateToChecklists(): void {
     if (this.obraId) {
-      this.currentTab = 'Checklists'; // Set the current tab to 'Checklists'
-      // Removed this.router.navigate() as checklists will be displayed as a tab
+      this.currentTab = 'Checklists';
     }
   }
 

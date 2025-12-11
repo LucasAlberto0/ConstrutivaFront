@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpEventType } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'; // Import MatSnackBar
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-documento-list',
@@ -18,38 +18,21 @@ export class DocumentoListComponent implements OnInit, OnChanges {
   @Input() obraId!: number;
   @Input() documentos: DocumentoListagemDto[] = [];
   @Output() documentoAdded = new EventEmitter<void>();
-  @Output() documentoDeleted = new EventEmitter<void>(); // Assuming delete functionality will be added later
+  @Output() documentoDeleted = new EventEmitter<void>();
 
   selectedFile: File | null = null;
   uploadProgress: number = 0;
-  selectedFolder: string = ''; // Added for folder selection
-  groupedDocuments: { [key: string]: DocumentoListagemDto[] } = {}; // Added for grouping
+  selectedFolder: string = '';
+  groupedDocuments: { [key: string]: DocumentoListagemDto[] } = {};
 
   constructor(
     private documentoService: DocumentoService,
-    private route: ActivatedRoute, // Keep for potential future use or if component can be used standalone
-    private router: Router, // Keep for potential future use or if component can be used standalone
-    private snackBar: MatSnackBar // Inject MatSnackBar
+    private route: ActivatedRoute,
+    private router: Router,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
-    // If obraId is not provided as input, try to get it from route (for standalone usage)
-    // This part is commented out because the component is expected to receive obraId as an Input
-    /*
-    if (!this.obraId) {
-      this.route.parent?.paramMap.subscribe(params => {
-        const id = params.get('id');
-        if (id) {
-          this.obraId = +id;
-          // If used standalone, load documents here
-          // this.loadDocumentsInternal();
-        } else {
-          console.error('Obra ID not found in route parameters.');
-          // this.router.navigate(['/dashboard']);
-        }
-      });
-    }
-    */
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -60,7 +43,7 @@ export class DocumentoListComponent implements OnInit, OnChanges {
 
   private groupDocumentsByFolder(documents: DocumentoListagemDto[]): void {
     this.groupedDocuments = documents.reduce((acc, document) => {
-      const folderName = document.tipo ? document.tipo.toString() : 'Outros'; // Group by 'tipo' instead of 'pasta'
+      const folderName = document.tipo ? document.tipo.toString() : 'Outros'; 
       if (!acc[folderName]) {
         acc[folderName] = [];
       }
@@ -81,12 +64,10 @@ export class DocumentoListComponent implements OnInit, OnChanges {
     }
 
     const documentDescription = `Documento anexado para obra ${this.obraId}`;
-    const documentType = this.selectedFolder || 'Outros'; // Use selected folder or default to 'Outros'
-
-    // Step 1: Create a document entry with basic info, providing a placeholder for caminhoArquivo
+    const documentType = this.selectedFolder || 'Outros'; 
     const newDocumento: DocumentoCriacaoDto = {
       nome: this.selectedFile.name,
-      caminhoArquivo: this.selectedFile.name, // Providing file name as placeholder for URL
+      caminhoArquivo: this.selectedFile.name, 
       obraId: this.obraId,
       descricao: documentDescription,
       tipo: documentType
@@ -95,7 +76,6 @@ export class DocumentoListComponent implements OnInit, OnChanges {
     this.documentoService.createDocumento(this.obraId, newDocumento).subscribe({
       next: (createdDocumento) => {
         if (createdDocumento.id) {
-          // Step 2: Upload the file using the created document ID, passing description and type
           this.documentoService.uploadDocumento(this.obraId, createdDocumento.id, this.selectedFile!, documentDescription, documentType).subscribe({
             next: (event: any) => {
               if (event.type === HttpEventType.UploadProgress) {
@@ -104,14 +84,13 @@ export class DocumentoListComponent implements OnInit, OnChanges {
                 console.log('File uploaded successfully!', event.body);
                 this.selectedFile = null;
                 this.uploadProgress = 0;
-                this.documentoAdded.emit(); // Notify parent to refresh documents
+                this.documentoAdded.emit(); 
                 this.snackBar.open('Documento enviado com sucesso!', 'Fechar', { duration: 3000, panelClass: ['success-snackbar'], verticalPosition: 'top' });
               }
             },
             error: (uploadErr) => {
               console.error('Erro ao fazer upload do arquivo', uploadErr);
               this.snackBar.open('Erro ao fazer upload do arquivo.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
-              // Optionally, delete the created document entry if upload fails
               if (createdDocumento.id) {
                 this.documentoService.deleteDocumento(this.obraId, createdDocumento.id).subscribe(() => {
                   console.log('Created document entry deleted due to upload failure.');
@@ -171,13 +150,12 @@ export class DocumentoListComponent implements OnInit, OnChanges {
       this.documentoService.deleteDocumento(this.obraId, documento.id).subscribe({
         next: () => {
           console.log(`Documento ${documento.nome} excluído com sucesso.`);
-          this.documentoDeleted.emit(); // Notify parent to refresh documents
+          this.documentoDeleted.emit(); 
           this.snackBar.open('Documento excluído com sucesso!', 'Fechar', { duration: 3000, panelClass: ['success-snackbar'], verticalPosition: 'top' });
         },
         error: (err) => {
           console.error('Erro ao excluir documento:', err);
           this.snackBar.open('Erro ao excluir documento.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
-          // Optionally, display an error message to the user
         }
       });
     }

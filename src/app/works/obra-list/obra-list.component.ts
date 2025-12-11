@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // Import FormsModule
+import { FormsModule } from '@angular/forms';
 import { ObraService } from '../../shared/obra.service';
 import { ObraListagemDto, ObraStatus } from '../../shared/models/obra.model';
 import { RouterLink } from '@angular/router';
@@ -8,7 +8,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-obra-list',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule], // Add FormsModule to imports
+  imports: [CommonModule, RouterLink, FormsModule],
   templateUrl: './obra-list.component.html',
   styleUrls: ['./obra-list.component.scss']
 })
@@ -18,7 +18,7 @@ export class ObraListComponent implements OnInit {
   loading: boolean = true;
   error: string | null = null;
   currentFilter: string = 'Todas';
-  searchTerm: string = ''; // New property for search term
+  searchTerm: string = ''; 
 
   constructor(private obraService: ObraService) { }
 
@@ -33,7 +33,7 @@ export class ObraListComponent implements OnInit {
         if (response && Array.isArray(response.data)) {
           this.obras = response.data;
           this.filteredObras = [...this.obras];
-          this.applySearchFilter(); // Apply search filter after loading obras
+          this.applySearchFilter(); 
         } else {
           console.error('Error: getObras() did not return an array in the data property.', response);
           this.obras = [];
@@ -52,18 +52,16 @@ export class ObraListComponent implements OnInit {
 
   filterObras(filter: string): void {
     this.currentFilter = filter;
-    this.applySearchFilter(); // Apply search filter after changing tab filter
+    this.applySearchFilter(); 
   }
 
   applySearchFilter(): void {
     let tempObras = [...this.obras];
 
-    // Apply tab filter first
     if (this.currentFilter !== 'Todas') {
       tempObras = tempObras.filter(obra => this.getStatusName(obra.status) === this.currentFilter);
     }
 
-    // Apply search term filter
     if (this.searchTerm) {
       const lowerCaseSearchTerm = this.searchTerm.toLowerCase();
       tempObras = tempObras.filter(obra =>

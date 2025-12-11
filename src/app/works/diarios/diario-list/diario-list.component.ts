@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DiarioService } from '../../../shared/diario.service';
 import { DiarioObraListagemDto, DiarioObraCriacaoDto, ComentarioCriacaoDto, Clima, DiarioObraDetalhesDto } from '../../../shared/models/diario.model';
-import { ComentarioDto } from '../../../shared/models/comentario.model'; // Added import for ComentarioDto
-import { AuthService } from '../../../shared/auth.service'; // Added import
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'; // Import MatSnackBar
+import { ComentarioDto } from '../../../shared/models/comentario.model';
+import { AuthService } from '../../../shared/auth.service';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-diario-list',
@@ -24,7 +24,7 @@ export class DiarioListComponent implements OnInit {
 
   newDiario: DiarioObraCriacaoDto = {
     data: new Date().toISOString(),
-    clima: 'Ensolarado', // Default value
+    clima: 'Ensolarado',
     quantidadeColaboradores: 0,
     descricaoAtividades: '',
     observacoes: '',
@@ -34,17 +34,16 @@ export class DiarioListComponent implements OnInit {
   };
   selectedFile: File | undefined;
   newComentarioTexto: string = '';
-  currentDiarioDetalhes: DiarioObraDetalhesDto | null = null; // To store details of a selected diario
-  currentDiarioPhotoUrl: string | undefined; // To store the URL of the photo
+  currentDiarioDetalhes: DiarioObraDetalhesDto | null = null;
+  currentDiarioPhotoUrl: string | undefined; 
   loading: boolean = false;
-  // error: string | null = null; // Removed error property
-  canManageDiarios: boolean = false; // Added property
+  canManageDiarios: boolean = false;
 
-  constructor(private diarioService: DiarioService, private authService: AuthService, private snackBar: MatSnackBar) { } // Injected MatSnackBar
+  constructor(private diarioService: DiarioService, private authService: AuthService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.newDiario.obraId = this.obraId;
-    this.canManageDiarios = this.authService.hasRole(['Admin', 'Fiscal']); // Initialize canManageDiarios
+    this.canManageDiarios = this.authService.hasRole(['Admin', 'Fiscal']);
   }
 
   onFileSelected(event: any): void {
@@ -64,7 +63,6 @@ export class DiarioListComponent implements OnInit {
     }
 
     this.loading = true;
-    // this.error = null; // Removed error assignment
 
     const diarioToCreate: DiarioObraCriacaoDto = {
       ...this.newDiario,
@@ -102,7 +100,6 @@ export class DiarioListComponent implements OnInit {
     }
 
     this.loading = true;
-    // this.error = null; // Removed error assignment
     this.diarioService.deleteDiario(this.obraId, diarioId).subscribe({
       next: () => {
         this.diarioDeleted.emit();
@@ -121,8 +118,7 @@ export class DiarioListComponent implements OnInit {
     if (!diarioId) return;
 
     this.loading = true;
-    // this.error = null; // Removed error assignment
-    this.currentDiarioPhotoUrl = undefined; // Clear previous photo
+    this.currentDiarioPhotoUrl = undefined;
 
     this.diarioService.getDiarioById(this.obraId, diarioId).subscribe({
       next: (details) => {
@@ -152,12 +148,10 @@ export class DiarioListComponent implements OnInit {
   closeDiarioDetails(): void {
     this.currentDiarioDetalhes = null;
     if (this.currentDiarioPhotoUrl) {
-      URL.revokeObjectURL(this.currentDiarioPhotoUrl); // Clean up the object URL
+      URL.revokeObjectURL(this.currentDiarioPhotoUrl); 
       this.currentDiarioPhotoUrl = undefined;
     }
   }
-
-  // Removed addFoto and deleteFoto methods as per new API spec
 
   addComentario(diarioId: number | undefined): void {
     if (!diarioId || !this.newComentarioTexto) {
@@ -170,16 +164,14 @@ export class DiarioListComponent implements OnInit {
     };
 
     this.loading = true;
-    // this.error = null; // Removed error assignment
     this.diarioService.addComentarioToDiario(this.obraId, diarioId, comentario).subscribe({
-      next: (newComment) => { // Expect newComment of type ComentarioDto
+      next: (newComment) => {
         this.newComentarioTexto = '';
         if (this.currentDiarioDetalhes && this.currentDiarioDetalhes.comentarios) {
-          this.currentDiarioDetalhes.comentarios.push(newComment); // Add new comment to the array
+          this.currentDiarioDetalhes.comentarios.push(newComment);
         } else if (this.currentDiarioDetalhes) {
-          this.currentDiarioDetalhes.comentarios = [newComment]; // Initialize if null
+          this.currentDiarioDetalhes.comentarios = [newComment]; 
         }
-        // this.viewDiarioDetails(diarioId); // No longer needed as we update the array directly
         this.loading = false;
         this.snackBar.open('Comentário adicionado com sucesso!', 'Fechar', { duration: 3000, panelClass: ['success-snackbar'], verticalPosition: 'top' });
       },
@@ -197,10 +189,9 @@ export class DiarioListComponent implements OnInit {
     }
 
     this.loading = true;
-    // this.error = null; // Removed error assignment
     this.diarioService.deleteComentarioFromDiario(this.obraId, diarioId, comentarioId).subscribe({
       next: () => {
-        this.viewDiarioDetails(diarioId); // Refresh details
+        this.viewDiarioDetails(diarioId); 
         this.loading = false;
         this.snackBar.open('Comentário excluído com sucesso!', 'Fechar', { duration: 3000, panelClass: ['success-snackbar'], verticalPosition: 'top' });
       },
@@ -214,10 +205,8 @@ export class DiarioListComponent implements OnInit {
 
   getClimaName(climaValue: Clima | number): string {
     if (typeof climaValue === 'string') {
-      return climaValue; // Already a string
+      return climaValue;
     }
-    // Assuming climaValue is a number representing an enum index
-    // This mapping needs to match the backend's enum definition
     switch (climaValue) {
       case 0: return 'Ensolarado';
       case 1: return 'Nublado';

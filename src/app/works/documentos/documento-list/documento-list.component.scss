@@ -10,7 +10,7 @@
 }
 
 h3 {
-  color: #e53935; // Red
+  color: #e53935; 
   margin-top: 0;
   margin-bottom: 1.5rem;
   text-align: center;
@@ -49,7 +49,7 @@ h3 {
 }
 
 .upload-area:hover {
-  border-color: #e53935; /* Red */
+  border-color: #e53935; 
 }
 
 .upload-content {
@@ -95,27 +95,27 @@ h3 {
 }
 
 .btn-attach {
-  background-color: #e53935; /* Red */
+  background-color: #e53935; 
   color: #fff;
   padding: 0.8rem 1.5rem;
   border: none;
-  border-radius: 8px; /* Changed from 4px to 8px */
+  border-radius: 8px; 
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  display: flex; /* Added for icon alignment */
-  align-items: center; /* Added for icon alignment */
-  gap: 8px; /* Added for spacing between icon and text */
+  display: flex; 
+  align-items: center; 
+  gap: 8px; 
 
   img {
-    width: 18px; /* Style for the icon */
-    height: 18px; /* Style for the icon */
-    filter: brightness(0) invert(1); /* Make the icon white */
+    width: 18px; 
+    height: 18px;
+    filter: brightness(0) invert(1); 
   }
 }
 
 .btn-attach:hover {
-  background-color: #c62828; /* Darker red */
+  background-color: #c62828; 
 }
 
 .upload-info {
@@ -151,7 +151,7 @@ h3 {
   width: 100%;
   padding: 0.8rem;
   border: 1px solid #ddd;
-  border-radius: 8px; /* Changed from 4px to 8px */
+  border-radius: 8px; 
   box-sizing: border-box;
   font-size: 1rem;
 }
@@ -189,7 +189,6 @@ h3 {
   text-decoration: underline;
 }
 
-/* Responsive adjustments for smaller screens */
 @media (max-width: 320px) {
   .documento-list-container {
     padding: 0.5rem;
@@ -253,13 +252,13 @@ h3 {
   gap: 1rem;
   margin-top: 2rem;
   margin-bottom: 2rem;
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  flex-wrap: wrap; 
 }
 
 .folder-type-box {
-  flex: 1; /* Distribute space equally */
-  min-width: 150px; /* Minimum width for each box */
-  max-width: 30%; /* Max width to ensure 3 per row on larger screens */
+  flex: 1; 
+  min-width: 150px; 
+  max-width: 30%; 
   background-color: #ffffff;
   border: 1px solid #eee;
   border-radius: 8px;
@@ -287,23 +286,22 @@ h3 {
   margin: 0;
 }
 
-/* Styling for the folder-box that contains the table */
 .document-folders {
   display: flex;
-  flex-direction: column; /* Stack vertically */
+  flex-direction: column; 
   margin-top: 2rem;
 }
 
-.folder-box { /* This is the existing class, I will modify it */
+.folder-box { 
   background-color: #ffffff;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   padding: 1.5rem;
-  flex: 1 1 100%; /* Occupy full width */
+  flex: 1 1 100%; 
   box-sizing: border-box;
   transition: all 0.3s ease-in-out;
-  margin-bottom: 1.5rem; /* Add some space between stacked folder boxes */
+  margin-bottom: 1.5rem; 
 }
 
 .folder-box:hover {
@@ -319,15 +317,15 @@ h3 {
   text-align: left;
   border-bottom: 2px solid #e53935;
   padding-bottom: 0.5rem;
-  display: flex; /* Added for icon alignment */
-  align-items: center; /* Added for icon alignment */
-  gap: 10px; /* Added for spacing between icon and text */
+  display: flex; 
+  align-items: center; 
+  gap: 10px; 
 }
 
 .folder-icon {
-  width: 24px; /* Adjust size as needed */
-  height: 24px; /* Adjust size as needed */
-  filter: invert(20%) sepia(90%) saturate(700%) hue-rotate(330deg) brightness(90%) contrast(90%); /* To make it red */
+  width: 24px; 
+  height: 24px; 
+  filter: invert(20%) sepia(90%) saturate(700%) hue-rotate(330deg) brightness(90%) contrast(90%); 
 }
 
 .folder-box table {
@@ -353,7 +351,7 @@ h3 {
 }
 
 .folder-box button {
-  background-color: #4CAF50; /* Green */
+  background-color: #4CAF50; 
   color: white;
   padding: 0.6rem 1rem;
   border: none;
@@ -364,10 +362,9 @@ h3 {
 }
 
 .folder-box button:hover {
-  background-color: #45a049; /* Darker green */
+  background-color: #45a049; 
 }
 
-/* Responsive adjustments for folder types */
 @media (max-width: 768px) {
   .folder-types-container {
     flex-direction: column;
@@ -375,7 +372,7 @@ h3 {
   }
 
   .folder-type-box {
-    max-width: 80%; /* Take more width on smaller screens */
+    max-width: 80%; 
     margin-bottom: 1rem;
   }
 
@@ -385,7 +382,7 @@ h3 {
   }
 
   .folder-box {
-    flex: 1 1 100%; /* Full width on smaller screens */
+    flex: 1 1 100%; 
     max-width: 100%;
   }
 }
@@ -429,47 +426,46 @@ h3 {
 
 .document-actions {
   display: flex;
-  gap: 10px; /* Space between buttons */
+  gap: 10px; 
 }
 
 .document-actions button {
-  background-color: #000; /* Changed to black */
+  background-color: #000; 
   color: white;
   padding: 0.5rem 1rem;
   border: none;
-  border-radius: 8px; /* Changed from 4px to 8px */
+  border-radius: 8px; 
   cursor: pointer;
   font-size: 0.85rem;
   transition: background-color 0.3s ease;
-  display: flex; /* Added for icon alignment */
-  align-items: center; /* Added for icon alignment */
-  gap: 5px; /* Added for spacing between icon and text */
+  display: flex; 
+  align-items: center; 
+  gap: 5px; 
 
   img {
-    width: 16px; /* Style for the icon */
-    height: 16px; /* Style for the icon */
-    filter: brightness(0) invert(1); /* Make the icon white */
+    width: 16px; 
+    height: 16px; 
+    filter: brightness(0) invert(1); 
   }
 }
 
 .document-actions button:hover {
-  background-color: #333; /* Darker black on hover */
+  background-color: #333; 
 }
 
 .success-snackbar {
-  background-color: #4CAF50 !important; /* Green background */
-  color: #fff !important; /* White text */
+  background-color: #4CAF50 !important; 
+  color: #fff !important;
 }
 
 .btn-delete-document {
-  background-color: #ef4444; /* Red for delete */
+  background-color: #ef4444; 
 
   &:hover {
-    background-color: #dc2626; /* Darker red on hover */
+    background-color: #dc2626; 
   }
 }
 
-/* Responsive adjustments for document items */
 @media (max-width: 768px) {
   .document-item {
     flex-direction: column;

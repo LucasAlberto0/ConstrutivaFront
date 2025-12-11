@@ -1,15 +1,13 @@
 @use "sass:color";
 
-// --- 1. Variáveis ---
 $color-primary: #ED213C;
 $color-dark: #333;
 $color-light: #fff;
 $color-gray: #666;
 $color-border: #eee;
 $breakpoint-tablet: 768px;
-$breakpoint-mobile: 420px; // Adjusted for smaller mobile devices
+$breakpoint-mobile: 420px; 
 
-// --- 2. Mixins para Responsividade ---
 @mixin mobile {
     @media (max-width: $breakpoint-mobile) {
         @content;
@@ -33,11 +31,11 @@ $breakpoint-mobile: 420px; // Adjusted for smaller mobile devices
 
     @include mobile {
         gap: 15px;
-        width: auto; // Remove width: 100% for mobile
+        width: auto; 
     }
 }
 
-// --- 3. Base/Reset e Botão Comum ---
+
 
 h2 {
     font-weight: 700;
@@ -77,18 +75,17 @@ p {
     }
 
     @include mobile {
-        padding: 6px 10px; // Even smaller padding on mobile
-        font-size: 0.7em; // Even smaller font size on mobile
+        padding: 6px 10px; 
+        font-size: 0.7em; 
     }
 }
 
-// --- 4. Layout Principal e Header ---
+
 header {
-    // Removed flex properties, now handled by .container-content
-    padding: 20px 0; // Vertical padding
+    padding: 20px 0; 
     border-bottom: 1px solid $color-border;
-    width: 100%; // Re-added width: 100% for desktop
-    max-width: none; // Override any inherited max-width
+    width: 100%; 
+    max-width: none; 
 }
 
 .logo {
@@ -103,7 +100,7 @@ header {
         color: #000;
 
         @include mobile {
-            font-size: 1em; // Even smaller on mobile
+            font-size: 1em; 
         }
     }
 
@@ -119,7 +116,7 @@ header {
         font-weight: 400;
 
         @include mobile {
-            font-size: 0.6em; // Even smaller on mobile
+            font-size: 0.6em; 
         }
     }
 
@@ -128,13 +125,9 @@ header {
         margin-right: 10px;
 
         @include mobile {
-            width: 35px; // Even smaller on mobile
+            width: 35px; 
         }
     }
-}
-
-main {
-    // Removed padding and max-width to allow content inside to control width
 }
 
 hr {
@@ -144,7 +137,7 @@ hr {
     margin: 40px 0;
 }
 
-// --- 5. SEÇÃO 1: HERO/DESTAQUE ---
+
 .hero-section {
     text-align: center;
     padding: 80px 50px 40px;
@@ -266,10 +259,9 @@ hr {
     }
 }
 
-// --- 6. SEÇÃO 2: FUNCIONALIDADES ---
 .funcionalidades {
     text-align: center;
-    padding: 40px 50px; // Adicionado padding horizontal aqui para centralizar o conteúdo
+    padding: 40px 50px; 
     
     @include mobile {
         padding-left: 20px;
@@ -336,7 +328,6 @@ hr {
     }
 }
 
-// --- 7. SEÇÃO 3: POR QUE ESCOLHER ---
 .porque-escolher {
     text-align: center;
     padding: 20px 50px 40px;
@@ -371,7 +362,7 @@ hr {
         max-width: 300px;
 
         @include tablet {
-             margin-bottom: 20px;
+            margin-bottom: 20px;
         }
 
         .icon-round {
@@ -403,7 +394,6 @@ hr {
     }
 }
 
-// --- 8. SEÇÃO 4: CTA FINAL ---
 .cta-section {
     background-color: #f0f0f0;
     text-align: center;
@@ -424,22 +414,21 @@ hr {
     }
 }
 
-// --- 9. Footer ---
 footer {
     background-color: #222;
     color: $color-light;
     text-align: center;
-    padding: 15px 0; // Vertical padding
+    padding: 15px 0; 
     font-size: 0.8em;
     line-height: 1.2;
     margin-top: 40px;
-    width: 100%; // Re-added width: 100% for desktop
-    max-width: none; // Override any inherited max-width
+    width: 100%; 
+    max-width: none; 
 
-    p { // Target all p tags in footer
+    p { 
         @include mobile {
-            font-size: 0.6em; // Even smaller font size on mobile
-            line-height: 1.1; // Reduced line-height
+            font-size: 0.6em; 
+            line-height: 1.1; 
         }
     }
 
@@ -448,8 +437,8 @@ footer {
     }
 
     @include mobile {
-        padding: 8px 0; // Even smaller vertical padding on mobile
-        width: auto; // Allow footer to shrink naturally on mobile
+        padding: 8px 0; 
+        width: auto; 
     }
 }
 

@@ -29,7 +29,7 @@ h2 {
   color: #555;
   padding: 0.8rem 1.5rem;
   border: none;
-  border-bottom: 2px solid transparent; /* For active state */
+  border-bottom: 2px solid transparent; 
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -38,12 +38,12 @@ h2 {
 }
 
 .btn-checklist:hover {
-  color: #e53935; /* Construtiva Red */
+  color: #e53935; 
   border-bottom-color: #e53935;
 }
 
 .btn-checklist.active {
-  color: #e53935; /* Construtiva Red */
+  color: #e53935; 
   border-bottom-color: #e53935;
   font-weight: bold;
 }
@@ -75,7 +75,7 @@ h2 {
 
 .progress-bar {
   height: 100%;
-  background-color: #28a745; /* Green */
+  background-color: #28a745; 
   border-radius: 5px;
   text-align: center;
   color: white;
@@ -123,14 +123,14 @@ h2 {
   left: 0;
   height: 20px;
   width: 20px;
-  background-color: #eee; /* White background */
-  border: 2px solid #e53935; /* Red border */
+  background-color: #eee; 
+  border: 2px solid #e53935; 
   border-radius: 4px;
   cursor: pointer;
 }
 
 .checklist-item .custom-checkbox input[type="checkbox"]:checked + label {
-  background-color: #e53935; /* Red background when checked */
+  background-color: #e53935; 
   border-color: #e53935;
 }
 
@@ -167,7 +167,7 @@ h2 {
   display: block;
   width: fit-content;
   margin: 1.5rem auto 0.5rem auto;
-  background-color: #e53935; /* Green */
+  background-color: #e53935; 
   color: white;
   padding: 0.8rem 2rem;
   border: none;
@@ -180,11 +180,10 @@ h2 {
 }
 
 .btn-save-checklist:hover {
-  background-color: #4d0403; /* Darker green */
+  background-color: #4d0403; 
   box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
 }
 
-/* Responsive adjustments for checklist section */
 @media (max-width: 768px) {
   .checklists-page-container {
     margin: 1rem;

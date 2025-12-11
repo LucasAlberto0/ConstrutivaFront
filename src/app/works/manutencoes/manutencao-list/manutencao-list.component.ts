@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ManutencaoService } from '../../../shared/manutencao.service';
 import { ManutencaoListagemDto, ManutencaoCriacaoDto } from '../../../shared/models/manutencao.model';
-import { AuthService } from '../../../shared/auth.service'; // Added import
-import { HttpClient } from '@angular/common/http'; // Import HttpClient
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'; // Import MatSnackBar
+import { AuthService } from '../../../shared/auth.service';
+import { HttpClient } from '@angular/common/http';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-manutencao-list',
@@ -21,15 +21,14 @@ export class ManutencaoListComponent implements OnInit {
   @Output() manutencaoDeleted = new EventEmitter<void>();
 
   newManutencao: ManutencaoCriacaoDto = {
-    dataManutencao: new Date().toISOString().split('T')[0], // Initialize with current date in YYYY-MM-DD format
+    dataManutencao: new Date().toISOString().split('T')[0], 
     descricao: '',
     obraId: 0
   };
-  selectedFile: File | null = null; // Property to hold the selected file
+  selectedFile: File | null = null;
   loading: boolean = false;
-  // error: string | null = null; // Removed error property
-  canManageManutencoes: boolean = false; // Added property
-  manutencaoImageUrls: { [key: number]: string } = {}; // To store object URLs for images
+  canManageManutencoes: boolean = false;
+  manutencaoImageUrls: { [key: number]: string } = {}; 
 
   showModal: boolean = false;
   modalImageUrl: string = '';
@@ -47,14 +46,13 @@ export class ManutencaoListComponent implements OnInit {
   constructor(
     private manutencaoService: ManutencaoService,
     private authService: AuthService,
-    private http: HttpClient, // Inject HttpClient
-    private snackBar: MatSnackBar // Inject MatSnackBar
+    private http: HttpClient,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
     this.newManutencao.obraId = this.obraId;
-    this.canManageManutencoes = this.authService.hasRole(['Admin', 'Coordenador']); // Initialize canManageManutencoes
-    // Fetch photos for existing maintenances
+    this.canManageManutencoes = this.authService.hasRole(['Admin', 'Coordenador']);
     this.manutencoes.forEach(manutencao => {
       if (manutencao.hasFoto && manutencao.id) {
         this.fetchManutencaoPhoto(manutencao.id);
@@ -77,7 +75,6 @@ export class ManutencaoListComponent implements OnInit {
     }
 
     this.loading = true;
-    // this.error = null; // Removed error assignment
 
     const formData = new FormData();
     formData.append('DataManutencao', this.newManutencao.dataManutencao);
@@ -94,8 +91,8 @@ export class ManutencaoListComponent implements OnInit {
           descricao: '',
           obraId: this.obraId
         };
-        this.selectedFile = null; // Clear selected file
-        this.manutencaoAdded.emit(); // Notify parent to refresh manutencoes
+        this.selectedFile = null; 
+        this.manutencaoAdded.emit(); 
         this.loading = false;
         this.snackBar.open('Manutenção adicionada com sucesso!', 'Fechar', { duration: 3000, panelClass: ['success-snackbar'], verticalPosition: 'top' });
       },
@@ -113,10 +110,9 @@ export class ManutencaoListComponent implements OnInit {
     }
 
     this.loading = true;
-    // this.error = null; // Removed error assignment
     this.manutencaoService.deleteManutencao(this.obraId, manutencaoId).subscribe({
       next: () => {
-        this.manutencaoDeleted.emit(); // Notify parent to refresh manutencoes
+        this.manutencaoDeleted.emit();
         this.loading = false;
         this.snackBar.open('Manutenção excluída com sucesso!', 'Fechar', { duration: 3000, panelClass: ['success-snackbar'], verticalPosition: 'top' });
       },
@@ -138,12 +134,11 @@ export class ManutencaoListComponent implements OnInit {
       error: (err) => {
         console.error(`Erro ao buscar foto para manutenção ${manutencaoId}:`, err);
         this.snackBar.open('Erro ao buscar foto para manutenção.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
-        // Handle error, e.g., display a placeholder image
       }
     });
   }
 
   getManutencaoPhotoUrl(manutencaoId: number): string {
-    return this.manutencaoImageUrls[manutencaoId] || ''; // Return object URL if available
+    return this.manutencaoImageUrls[manutencaoId] || ''; 
   }
 }

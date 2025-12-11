@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AditivoService } from '../../../shared/aditivo.service';
 import { AditivoListagemDto, AditivoCriacaoDto } from '../../../shared/models/aditivo.model';
-import { AuthService } from '../../../shared/auth.service'; // Added import
+import { AuthService } from '../../../shared/auth.service';
 
 @Component({
   selector: 'app-aditivo-list',
@@ -25,13 +25,13 @@ export class AditivoListComponent implements OnInit {
   };
   loading: boolean = false;
   error: string | null = null;
-  canManageAditivos: boolean = false; // Added property
+  canManageAditivos: boolean = false;
 
-  constructor(private aditivoService: AditivoService, private authService: AuthService) { } // Injected AuthService
+  constructor(private aditivoService: AditivoService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.newAditivo.obraId = this.obraId;
-    this.canManageAditivos = this.authService.hasRole(['Admin', 'Coordenador']); // Initialize canManageAditivos
+    this.canManageAditivos = this.authService.hasRole(['Admin', 'Coordenador']);
   }
 
   addAditivo(): void {
@@ -45,7 +45,7 @@ export class AditivoListComponent implements OnInit {
     this.aditivoService.createAditivo(this.obraId, this.newAditivo).subscribe({
       next: () => {
         this.newAditivo = { descricao: '', data: new Date().toISOString(), obraId: this.obraId };
-        this.aditivoAdded.emit(); // Notify parent to refresh aditivos
+        this.aditivoAdded.emit(); 
         this.loading = false;
       },
       error: (err) => {
@@ -65,7 +65,7 @@ export class AditivoListComponent implements OnInit {
     this.error = null;
     this.aditivoService.deleteAditivo(this.obraId, aditivoId).subscribe({
       next: () => {
-        this.aditivoDeleted.emit(); // Notify parent to refresh aditivos
+        this.aditivoDeleted.emit(); 
         this.loading = false;
       },
       error: (err) => {

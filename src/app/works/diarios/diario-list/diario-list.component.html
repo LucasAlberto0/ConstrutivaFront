@@ -40,7 +40,7 @@
     </form>
   </div>
 
-  <div *ngIf="diarios && diarios.length > 0" class="diarios-display">
+  <div *ngIf="diarios && diarios.length > 0" class="diarios-display" data-aos="zoom-in" data-aos-duration="1500">
     <h4>Diários Registrados</h4>
     <ul>
       <li *ngFor="let diario of diarios">
@@ -57,9 +57,8 @@
     Nenhum diário de obra registrado para esta obra.
   </div>
 
-  <!-- Diario Details Modal/Section -->
-  <div *ngIf="currentDiarioDetalhes" class="diario-details-modal">
-    <div class="modal-content">
+  <div *ngIf="currentDiarioDetalhes" class="diario-details-modal" >
+    <div class="modal-content" data-aos="zoom-in" data-aos-duration="1500">
       <button class="btn-close" (click)="closeDiarioDetails()">X</button>
       <h4>Detalhes do Diário de {{ currentDiarioDetalhes.data | date:'dd/MM/yyyy' }}</h4>
       <p><strong>Clima:</strong> {{ getClimaName(currentDiarioDetalhes.clima) }}</p>

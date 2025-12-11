@@ -30,7 +30,7 @@ export class ObraEditComponent implements OnInit {
     private fb: FormBuilder,
     private obraService: ObraService,
     private router: Router,
-    private route: ActivatedRoute, // Inject ActivatedRoute
+    private route: ActivatedRoute,
     private authService: AuthService,
     private _snackBar: MatSnackBar
   ) {

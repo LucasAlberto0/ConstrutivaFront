@@ -4,40 +4,40 @@ export type Clima = 'Ensolarado' | 'Nublado' | 'Chuvoso' | 'ParcialmenteNublado'
 
 export interface DiarioObraListagemDto {
   id: number;
-  data: string; // Formato ISO 8601 (e.g., "2025-12-02T10:30:00Z")
+  data: string; 
   clima: Clima;
   obraId: number;
   nomeObra?: string;
 }
 
 export interface DiarioObraCriacaoDto {
-  data: string; // Formato ISO 8601
+  data: string; 
   clima: Clima;
   quantidadeColaboradores: number;
   descricaoAtividades: string;
   observacoes?: string;
-  obraId: number; // Deve corresponder ao {obraId} da rota
-  foto?: File; // Opcional, enviar como File no FormData
-  comentarios?: ComentarioCriacaoDto[]; // Opcional, pode ser um array de objetos
+  obraId: number; 
+  foto?: File; 
+  comentarios?: ComentarioCriacaoDto[]; 
 }
 
 export interface DiarioObraAtualizacaoDto {
-  data: string; // Formato ISO 8601
+  data: string; 
   clima: Clima;
   quantidadeColaboradores: number;
   descricaoAtividades: string;
   observacoes?: string;
-  foto?: File; // Opcional, enviar como File no FormData. Se presente, substitui a foto anterior.
+  foto?: File; 
 }
 
 export interface DiarioObraDetalhesDto {
   id: number;
-  data: string; // Formato ISO 8601
+  data: string; 
   clima: Clima;
   quantidadeColaboradores: number;
   descricaoAtividades: string;
   observacoes?: string;
-  hasFoto: boolean; // Indica se há uma foto associada (para buscar via endpoint /foto)
+  hasFoto: boolean; 
   obraId: number;
   nomeObra?: string;
   comentarios?: ComentarioDto[];

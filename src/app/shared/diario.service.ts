@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { DiarioObraListagemDto, DiarioObraCriacaoDto, DiarioObraAtualizacaoDto, DiarioObraDetalhesDto, ComentarioCriacaoDto } from './models/diario.model';
-import { ComentarioDto } from './models/comentario.model'; // Added import for ComentarioDto
+import { ComentarioDto } from './models/comentario.model';
 
 @Injectable({
   providedIn: 'root'
@@ -62,8 +62,6 @@ export class DiarioService {
   getDiarioPhoto(obraId: number, diarioId: number): Observable<Blob> {
     return this.http.get(`${this.apiUrl}/api/obras/${obraId}/Diarios/${diarioId}/foto`, { responseType: 'blob' });
   }
-
-  // Removed addFotoToDiario and deleteFotoFromDiario as per new API spec
 
   addComentarioToDiario(obraId: number, diarioId: number, comentario: ComentarioCriacaoDto): Observable<ComentarioDto> {
     return this.http.post<ComentarioDto>(`${this.apiUrl}/api/obras/${obraId}/Diarios/${diarioId}/comentarios`, comentario);

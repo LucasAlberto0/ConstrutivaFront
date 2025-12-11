@@ -2,10 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
-import { ChecklistService } from '../../shared/checklist.service'; // Import ChecklistService
-import { ChecklistCriacaoDto, ChecklistItemCriacaoDto, ChecklistTipo } from '../../shared/models/checklist.model'; // Import DTOs
-import { ChangeDetectorRef } from '@angular/core'; // Import ChangeDetectorRef
+import { HttpClientModule } from '@angular/common/http';
+import { ChecklistService } from '../../shared/checklist.service';
+import { ChecklistCriacaoDto, ChecklistItemCriacaoDto, ChecklistTipo } from '../../shared/models/checklist.model';
+import { ChangeDetectorRef } from '@angular/core';
 
 interface ChecklistItem {
   name: string;
@@ -20,9 +20,9 @@ interface ChecklistItem {
   styleUrls: ['./checklists-page.component.scss']
 })
 export class ChecklistsPageComponent implements OnInit {
-  @Input() obraId!: number; // Input to receive obraId from route or parent component
+  @Input() obraId!: number; 
 
-  showInicioObraChecklist: boolean = true; // Set to true to show by default
+  showInicioObraChecklist: boolean = true; 
   showEntregaObraChecklist: boolean = false;
 
   inicioObraChecklist: ChecklistItem[] = [
@@ -50,7 +50,7 @@ export class ChecklistsPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private checklistService: ChecklistService,
-    private cdr: ChangeDetectorRef // Inject ChangeDetectorRef
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -59,44 +59,38 @@ export class ChecklistsPageComponent implements OnInit {
       if (id) {
         this.obraId = +id;
         console.log('ChecklistsPageComponent received obraId:', this.obraId);
-
-        // Load InicioObra checklist
         this.checklistService.getChecklist(this.obraId, ChecklistTipo.InicioObra).subscribe({
           next: (data: any) => {
             if (data && data.itens && data.itens.length > 0) {
               this.inicioObraChecklist = data.itens.map((item: any) => ({
                 name: item.nome,
-                completed: item.concluido // Use lowercase 'c' as per backend response
+                completed: item.concluido 
               }));
-              console.log('InicioObraChecklist populated from backend:', this.inicioObraChecklist); // More specific log
-              this.cdr.detectChanges(); // Explicitly trigger change detection
+              console.log('InicioObraChecklist populated from backend:', this.inicioObraChecklist);
+              this.cdr.detectChanges(); 
             } else {
               console.log('No existing InicioObra checklist found, using default.');
             }
           },
           error: (err: any) => {
             console.warn('No existing InicioObra checklist found or error loading:', err);
-            // Keep default checklist if not found or error
           }
         });
-
-        // Load EntregaObra checklist
         this.checklistService.getChecklist(this.obraId, ChecklistTipo.EntregaObra).subscribe({
           next: (data: any) => {
             if (data && data.itens && data.itens.length > 0) {
               this.entregaObraChecklist = data.itens.map((item: any) => ({
                 name: item.nome,
-                completed: item.concluido // Use lowercase 'c' as per backend response
+                completed: item.concluido 
               }));
-              console.log('EntregaObraChecklist populated from backend:', this.entregaObraChecklist); // More specific log
-              this.cdr.detectChanges(); // Explicitly trigger change detection
+              console.log('EntregaObraChecklist populated from backend:', this.entregaObraChecklist);
+              this.cdr.detectChanges(); 
             } else {
               console.log('No existing EntregaObra checklist found, using default.');
             }
           },
           error: (err: any) => {
             console.warn('No existing EntregaObra checklist found or error loading:', err);
-            // Keep default checklist if not found or error
           }
         });
 
@@ -121,16 +115,14 @@ export class ChecklistsPageComponent implements OnInit {
   toggleChecklist(type: 'inicio' | 'entrega'): void {
     if (type === 'inicio') {
       this.showInicioObraChecklist = !this.showInicioObraChecklist;
-      this.showEntregaObraChecklist = false; // Close other checklist
+      this.showEntregaObraChecklist = false; 
     } else {
       this.showEntregaObraChecklist = !this.showEntregaObraChecklist;
-      this.showInicioObraChecklist = false; // Close other checklist
+      this.showInicioObraChecklist = false; 
     }
   }
 
   calculateProgress(type: 'inicio' | 'entrega'): void {
-    // Progress is automatically recalculated by the getters when items change
-    // This method can be used for any additional logic if needed, e.g., saving state
   }
 
   saveChecklist(type: 'inicio' | 'entrega'): void {
@@ -147,14 +139,14 @@ export class ChecklistsPageComponent implements OnInit {
       checklistItems = this.inicioObraChecklist.map(item => ({
         Nome: item.name,
         Concluido: item.completed,
-        Observacao: '' // Assuming no observation for now
+        Observacao: ''
       }));
       checklistTipo = ChecklistTipo.InicioObra;
     } else {
       checklistItems = this.entregaObraChecklist.map(item => ({
         Nome: item.name,
         Concluido: item.completed,
-        Observacao: '' // Assuming no observation for now
+        Observacao: ''
       }));
       checklistTipo = ChecklistTipo.EntregaObra;
     }
@@ -164,16 +156,14 @@ export class ChecklistsPageComponent implements OnInit {
       ObraId: this.obraId,
       Itens: checklistItems
     };
-    console.log('Payload being sent to backend:', checklistToSave); // Add this line
+    console.log('Payload being sent to backend:', checklistToSave);
 
     this.checklistService.createChecklist(this.obraId, checklistToSave).subscribe({
       next: (response: any) => {
         console.log('Checklist saved successfully:', response);
-        // Optionally, show a success message to the user
       },
       error: (error: any) => {
         console.error('Error saving checklist:', error);
-        // Optionally, show an error message to the user
       }
     });
   }

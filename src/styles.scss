@@ -1,13 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
 
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%; /* Ensure html and body take full height */
+  height: 100%; 
   font-family: 'Poppins', sans-serif;
-  color: #333; /* Using $color-dark from landing page */
+  color: #333; 
   line-height: 1.6;
-  background-color: #fff; /* Using $color-light from landing page */
+  background-color: #fff; 
 }
 
 .container {
@@ -15,65 +14,62 @@ html, body {
   margin: 0 auto;
 }
 
-/* Global Button Styles */
 button {
   padding: 0.75rem 1.25rem;
-  border-radius: 8px; /* Slightly more rounded */
+  border-radius: 8px; 
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  border: 1px solid transparent; /* Default transparent border */
-  font-family: inherit; /* Inherit font from body */
+  border: 1px solid transparent; 
+  font-family: inherit;
 }
 
 button:hover {
   opacity: 0.9;
 }
 
-/* Primary Button Style */
+
 .btn-primary {
-  background-color: #e53935; /* Red */
+  background-color: #e53935; 
   color: #fff;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .btn-primary:hover {
-  background-color: #c62828; /* Darker red */
+  background-color: #c62828; 
   box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
-/* Danger Button Style */
+
 .btn-danger {
-  background-color: #dc3545; /* Red */
+  background-color: #dc3545; 
   color: #fff;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .btn-danger:hover {
-  background-color: #c82333; /* Darker red */
+  background-color: #c82333; 
   box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
-/* Info Button Style */
+
 .btn-info {
-  background-color: #17a2b8; /* Teal */
+  background-color: #17a2b8; 
   color: #fff;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .btn-info:hover {
-  background-color: #138496; /* Darker teal */
+  background-color: #138496; 
   box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
-/* Small Button Style */
 .btn-small {
   padding: 0.4rem 0.8rem;
   font-size: 0.8rem;
   border-radius: 6px;
 }
 
-/* Back Button Style */
 .btn-back {
   background-color: transparent;
   color: #555;
@@ -86,19 +82,17 @@ button:hover {
   color: #333;
 }
 
-/* Logout Button Style */
 .btn-logout {
-  background-color: #e53935; /* Red */
+  background-color: #e53935; 
   color: #fff;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .btn-logout:hover {
-  background-color: #c62828; /* Darker red */
+  background-color: #c62828; 
   box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
-/* Close Button Style */
 .btn-close {
   background-color: transparent;
   color: #6c757d;
@@ -106,7 +100,7 @@ button:hover {
   padding: 0.25rem 0.5rem;
   font-size: 1.2rem;
   line-height: 1;
-  border-radius: 50%; /* Circular */
+  border-radius: 50%; 
   width: 30px;
   height: 30px;
   display: flex;
@@ -151,14 +145,13 @@ button:hover {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Snackbar Styles */
 .error-snackbar {
-  background-color: #d32f2f !important; /* Red */
+  background-color: #d32f2f !important; 
   color: #fff !important;
 }
 
 .warn-snackbar {
-  background-color: #ffc107 !important; /* Amber */
+  background-color: #ffc107 !important; 
   color: #333 !important;
 }
 

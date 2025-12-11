@@ -91,7 +91,7 @@ export interface ChecklistDto {
   itens?: ChecklistItemDto[];
 }
 
-import { ManutencaoListagemDto } from './manutencao.model'; // Import ManutencaoListagemDto
+import { ManutencaoListagemDto } from './manutencao.model';
 
 export interface ObraDetalhesDto {
   id?: number;
@@ -109,7 +109,7 @@ export interface ObraDetalhesDto {
   status?: ObraStatus;
   observacoes?: string;
   aditivos?: AditivoDto[];
-  manutencoes?: ManutencaoListagemDto[]; // Changed to ManutencaoListagemDto[]
+  manutencoes?: ManutencaoListagemDto[];
   diariosObra?: DiarioObraDto[];
   documentos?: DocumentoDto[];
   checklists?: ChecklistDto[];
