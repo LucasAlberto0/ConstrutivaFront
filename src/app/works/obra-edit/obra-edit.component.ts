@@ -80,7 +80,6 @@ export class ObraEditComponent implements OnInit {
       error: (err) => {
         this.loading = false;
         this._snackBar.open('Falha ao carregar detalhes da obra.', 'Fechar', { duration: 3000, verticalPosition: 'top', panelClass: ['error-snackbar'] });
-        console.error(err);
         this.router.navigate(['/obras']);
       }
     });
@@ -115,7 +114,6 @@ export class ObraEditComponent implements OnInit {
         error: (err) => {
           this.loading = false;
           this._snackBar.open('Falha ao atualizar obra. Tente novamente.', 'Fechar', { duration: 3000, verticalPosition: 'top', panelClass: ['error-snackbar'] });
-          console.error(err);
         }
       });
     } else {

@@ -35,7 +35,6 @@ export class ObraListComponent implements OnInit {
           this.filteredObras = [...this.obras];
           this.applySearchFilter(); 
         } else {
-          console.error('Error: getObras() did not return an array in the data property.', response);
           this.obras = [];
           this.filteredObras = [];
           this.error = 'Failed to load works: Invalid data format.';
@@ -45,7 +44,6 @@ export class ObraListComponent implements OnInit {
       error: (err) => {
         this.error = 'Failed to load works.';
         this.loading = false;
-        console.error('Error loading obras:', err);
       }
     });
   }

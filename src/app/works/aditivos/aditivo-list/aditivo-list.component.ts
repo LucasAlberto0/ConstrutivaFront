@@ -51,7 +51,6 @@ export class AditivoListComponent implements OnInit {
       error: (err) => {
         this.error = 'Falha ao adicionar aditivo.';
         this.loading = false;
-        console.error('Erro ao adicionar aditivo:', err);
       }
     });
   }
@@ -71,7 +70,6 @@ export class AditivoListComponent implements OnInit {
       error: (err) => {
         this.error = 'Falha ao excluir aditivo.';
         this.loading = false;
-        console.error('Erro ao excluir aditivo:', err);
       }
     });
   }

@@ -89,7 +89,6 @@ export class DiarioListComponent implements OnInit {
       error: (err) => {
         this.snackBar.open('Falha ao adicionar diário de obra.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
         this.loading = false;
-        console.error('Erro ao adicionar diário:', err);
       }
     });
   }
@@ -109,7 +108,6 @@ export class DiarioListComponent implements OnInit {
       error: (err) => {
         this.snackBar.open('Falha ao excluir diário de obra.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
         this.loading = false;
-        console.error('Erro ao excluir diário:', err);
       }
     });
   }
@@ -130,7 +128,6 @@ export class DiarioListComponent implements OnInit {
               this.currentDiarioPhotoUrl = objectURL;
             },
             error: (photoErr) => {
-              console.error('Erro ao carregar foto do diário:', photoErr);
               this.snackBar.open('Falha ao carregar foto do diário.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
             }
           });
@@ -140,7 +137,6 @@ export class DiarioListComponent implements OnInit {
       error: (err) => {
         this.snackBar.open('Falha ao carregar detalhes do diário.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
         this.loading = false;
-        console.error('Erro ao carregar detalhes do diário:', err);
       }
     });
   }
@@ -178,7 +174,6 @@ export class DiarioListComponent implements OnInit {
       error: (err) => {
         this.snackBar.open('Falha ao adicionar comentário.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
         this.loading = false;
-        console.error('Erro ao adicionar comentário:', err);
       }
     });
   }
@@ -198,7 +193,6 @@ export class DiarioListComponent implements OnInit {
       error: (err) => {
         this.snackBar.open('Falha ao excluir comentário.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
         this.loading = false;
-        console.error('Erro ao excluir comentário:', err);
       }
     });
   }

@@ -102,16 +102,12 @@ export class AuthService {
     if (token) {
       try {
         const decodedToken = jwtDecode<DecodedToken>(token);
-        console.log('AuthService: Decoded Token:', decodedToken);
         const role = this.extractRoleFromDecodedToken(decodedToken);
-        console.log('AuthService: Extracted Role:', role);
         return role;
       } catch (Error) {
-        console.error('AuthService: Error decoding token:', Error);
         return null;
       }
     }
-    console.log('AuthService: No token found.');
     return null;
   }
 
@@ -126,7 +122,6 @@ export class AuthService {
 
   hasRole(roles: string | string[]): boolean {
     const userRole = this.getRole();
-    console.log('AuthService: Checking role. User Role:', userRole, 'Required Roles:', roles);
     if (!userRole) {
       return false;
     }
@@ -141,29 +136,21 @@ export class AuthService {
     if (token) {
       try {
         const decodedToken = jwtDecode<DecodedToken>(token);
-        console.log('AuthService: Decoded Token for User ID:', decodedToken);
         if (decodedToken.sub) {
-          console.log('AuthService: User ID (sub) found:', decodedToken.sub);
           return decodedToken.sub;
         } else {
-          console.log('AuthService: "sub" claim not found in token. Checking other common claims...');
           if (decodedToken.nameid) {
-            console.log('AuthService: User ID (nameid) found:', decodedToken.nameid);
             return decodedToken.nameid;
           }
           if (decodedToken.jti) {
-            console.log('AuthService: User ID (jti) found:', decodedToken.jti);
             return decodedToken.jti;
           }
-          console.log('AuthService: No common user ID claim found in token.');
           return null;
         }
       } catch (Error) {
-        console.error('AuthService: Error decoding token for user ID:', Error);
         return null;
       }
     }
-    console.log('AuthService: No token found for getUserIdFromToken.');
     return null;
   }
 }

@@ -58,7 +58,6 @@ export class ChecklistsPageComponent implements OnInit {
       const id = params.get('id');
       if (id) {
         this.obraId = +id;
-        console.log('ChecklistsPageComponent received obraId:', this.obraId);
         this.checklistService.getChecklist(this.obraId, ChecklistTipo.InicioObra).subscribe({
           next: (data: any) => {
             if (data && data.itens && data.itens.length > 0) {
@@ -66,14 +65,11 @@ export class ChecklistsPageComponent implements OnInit {
                 name: item.nome,
                 completed: item.concluido 
               }));
-              console.log('InicioObraChecklist populated from backend:', this.inicioObraChecklist);
               this.cdr.detectChanges(); 
             } else {
-              console.log('No existing InicioObra checklist found, using default.');
             }
           },
           error: (err: any) => {
-            console.warn('No existing InicioObra checklist found or error loading:', err);
           }
         });
         this.checklistService.getChecklist(this.obraId, ChecklistTipo.EntregaObra).subscribe({
@@ -83,19 +79,15 @@ export class ChecklistsPageComponent implements OnInit {
                 name: item.nome,
                 completed: item.concluido 
               }));
-              console.log('EntregaObraChecklist populated from backend:', this.entregaObraChecklist);
               this.cdr.detectChanges(); 
             } else {
-              console.log('No existing EntregaObra checklist found, using default.');
             }
           },
           error: (err: any) => {
-            console.warn('No existing EntregaObra checklist found or error loading:', err);
           }
         });
 
       } else {
-        console.error('ChecklistsPageComponent: obraId not found in route parameters.');
       }
     });
   }
@@ -127,7 +119,6 @@ export class ChecklistsPageComponent implements OnInit {
 
   saveChecklist(type: 'inicio' | 'entrega'): void {
     if (!this.obraId) {
-      console.error('Obra ID is missing, cannot save checklist.');
       return;
     }
 
@@ -156,14 +147,11 @@ export class ChecklistsPageComponent implements OnInit {
       ObraId: this.obraId,
       Itens: checklistItems
     };
-    console.log('Payload being sent to backend:', checklistToSave);
 
     this.checklistService.createChecklist(this.obraId, checklistToSave).subscribe({
       next: (response: any) => {
-        console.log('Checklist saved successfully:', response);
       },
       error: (error: any) => {
-        console.error('Error saving checklist:', error);
       }
     });
   }

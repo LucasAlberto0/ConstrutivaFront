@@ -67,7 +67,6 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
         }
       },
       error: (err: any) => {
-        console.error('Failed to fetch user info for profile picture:', err);
         this.userProfilePicUrl = 'public/img/userIcon.svg';
       }
     });
@@ -103,7 +102,6 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
 
   sendToDaiAssistant(message: string): void {
     if (!this.userId) {
-      console.error('User ID not available. Cannot send message to Dai Assistant.');
       this.messages.push({
         text: 'Erro: ID do usuário não disponível. Por favor, tente novamente mais tarde.',
         timestamp: new Date(),
@@ -137,7 +135,6 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
       },
       error: (err) => {
         this.isLoading = false;
-        console.error('Error calling Dai Assistant API:', err);
         this.messages.push({
           text: 'Desculpe, não consegui me conectar com a assistente no momento. Por favor, tente novamente.',
           timestamp: new Date(),

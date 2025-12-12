@@ -42,7 +42,6 @@ export class RegisterComponent {
           errorMessage = err.message;
         }
         this._snackBar.open('Erro ao cadastrar', errorMessage, { duration: 3000, verticalPosition: 'top', panelClass: ['error-snackbar'] });
-        console.error('Register error:', err);
       }
     });
   }

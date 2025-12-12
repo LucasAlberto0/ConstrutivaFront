@@ -94,7 +94,6 @@ export class ObraDetailComponent implements OnInit {
       error: (err) => {
         this.error = 'Failed to load obra details.';
         this.loading = false;
-        console.error('Error loading obra details:', err);
       }
     });
   }
@@ -160,7 +159,6 @@ export class ObraDetailComponent implements OnInit {
           this.router.navigate(['/obras']); 
         },
         error: (err) => {
-          console.error('Failed to delete obra:', err);
         }
       });
     }

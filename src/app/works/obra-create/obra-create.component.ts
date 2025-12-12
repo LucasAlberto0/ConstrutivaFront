@@ -47,7 +47,6 @@ export class ObraCreateComponent {
       status: [0, Validators.required]
     });
     this.canCreateObra = this.authService.hasRole(['Admin', 'Coordenador']);
-    console.log('ObraCreateComponent: canCreateObra =', this.canCreateObra);
   }
 
   goBack(): void {
@@ -75,7 +74,6 @@ export class ObraCreateComponent {
         error: (err) => {
           this.loading = false;
           this._snackBar.open('Falha ao criar obra. Tente novamente.', 'Fechar', { duration: 3000, verticalPosition: 'top', panelClass: ['error-snackbar'] });
-          console.error(err);
         }
       });
     } else {

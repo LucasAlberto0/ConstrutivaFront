@@ -99,7 +99,6 @@ export class ManutencaoListComponent implements OnInit {
       error: (err) => {
         this.snackBar.open('Falha ao adicionar manutenção.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
         this.loading = false;
-        console.error('Erro ao adicionar manutenção:', err);
       }
     });
   }
@@ -119,7 +118,6 @@ export class ManutencaoListComponent implements OnInit {
       error: (err) => {
         this.snackBar.open('Falha ao excluir manutenção.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
         this.loading = false;
-        console.error('Erro ao excluir manutenção:', err);
       }
     });
   }
@@ -132,7 +130,6 @@ export class ManutencaoListComponent implements OnInit {
         this.manutencaoImageUrls[manutencaoId] = objectURL;
       },
       error: (err) => {
-        console.error(`Erro ao buscar foto para manutenção ${manutencaoId}:`, err);
         this.snackBar.open('Erro ao buscar foto para manutenção.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
       }
     });

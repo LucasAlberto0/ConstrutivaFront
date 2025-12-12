@@ -81,7 +81,6 @@ export class DocumentoListComponent implements OnInit, OnChanges {
               if (event.type === HttpEventType.UploadProgress) {
                 this.uploadProgress = Math.round(100 * (event.loaded / event.total));
               } else if (event.type === HttpEventType.Response) {
-                console.log('File uploaded successfully!', event.body);
                 this.selectedFile = null;
                 this.uploadProgress = 0;
                 this.documentoAdded.emit(); 
@@ -89,11 +88,9 @@ export class DocumentoListComponent implements OnInit, OnChanges {
               }
             },
             error: (uploadErr) => {
-              console.error('Erro ao fazer upload do arquivo', uploadErr);
               this.snackBar.open('Erro ao fazer upload do arquivo.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
               if (createdDocumento.id) {
                 this.documentoService.deleteDocumento(this.obraId, createdDocumento.id).subscribe(() => {
-                  console.log('Created document entry deleted due to upload failure.');
                 });
               }
             }
@@ -101,7 +98,6 @@ export class DocumentoListComponent implements OnInit, OnChanges {
         }
       },
       error: (createErr) => {
-        console.error('Erro ao criar entrada do documento', createErr);
         this.snackBar.open('Erro ao criar entrada do documento.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
       }
     });
@@ -120,7 +116,6 @@ export class DocumentoListComponent implements OnInit, OnChanges {
           URL.revokeObjectURL(objectUrl);
         },
         error: (err) => {
-          console.error('Erro ao baixar documento', err);
           this.snackBar.open('Erro ao baixar documento.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
         }
       });
@@ -141,7 +136,6 @@ export class DocumentoListComponent implements OnInit, OnChanges {
 
   onDelete(documento: DocumentoListagemDto): void {
     if (!documento.id || !this.obraId) {
-      console.error('ID do documento ou ID da obra ausente para exclusão.');
       this.snackBar.open('ID do documento ou ID da obra ausente para exclusão.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
       return;
     }
@@ -149,12 +143,10 @@ export class DocumentoListComponent implements OnInit, OnChanges {
     if (confirm(`Tem certeza que deseja excluir o documento "${documento.nome}"?`)) {
       this.documentoService.deleteDocumento(this.obraId, documento.id).subscribe({
         next: () => {
-          console.log(`Documento ${documento.nome} excluído com sucesso.`);
           this.documentoDeleted.emit(); 
           this.snackBar.open('Documento excluído com sucesso!', 'Fechar', { duration: 3000, panelClass: ['success-snackbar'], verticalPosition: 'top' });
         },
         error: (err) => {
-          console.error('Erro ao excluir documento:', err);
           this.snackBar.open('Erro ao excluir documento.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
         }
       });

@@ -55,7 +55,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         }
       },
       error: (err) => {
-        console.error('Failed to load user info:', err);
       }
     });
   }
@@ -76,7 +75,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           this.uploadingPicture = false;
         },
         error: (err) => {
-          console.error('Failed to upload profile picture:', err);
           this.uploadingPicture = false;
         }
       });
@@ -94,7 +92,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       error: (err) => {
         this.error = 'Failed to load dashboard summary.';
         this.loading = false;
-        console.error('Dashboard summary error:', err);
       }
     });
   }
