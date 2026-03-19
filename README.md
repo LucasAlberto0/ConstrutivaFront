@@ -1,59 +1,75 @@
-# ConstrutivaFront2
+<div align="center">
+  <img src="public/img/logoMP.png" alt="Construtiva Logo" width="120">
+  <h1>CONSTRUTIVA</h1>
+  <p><strong>Gestão de Obras com Precisão Cirúrgica</strong></p>
+  
+  [![Angular](https://img.shields.io/badge/Angular-19.2-DD0031?style=for-the-badge&logo=angular)](https://angular.dev/)
+  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+</div>
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.11.
+---
 
-## Development server
+## 🏗️ Sobre o Projeto
 
-To start a local development server, run:
+O **Construtiva** é uma plataforma moderna e intuitiva desenvolvida para profissionais da engenharia civil e arquitetura que buscam controle total e transparência no canteiro de obras. Do gerenciamento de orçamentos e aditivos à documentação técnica e diários de obra, o sistema centraliza as informações críticas para garantir a entrega no prazo e no custo planejado.
 
+Esta interface foi redesenhada para oferecer uma experiência de usuário **premium**, com foco em conversão e usabilidade mobile.
+
+## 🚀 Inspiração & Origem
+
+Este projeto nasceu de uma ideia original de sistema da empresa **Medeiros e Pinheiro ARQ/ENG**, referência em soluções técnicas para construção civil.
+
+🔗 **Visite o site oficial:** [medeirosepinheiro.com.br](https://medeirosepinheiro.com.br/)
+
+## ✨ Funcionalidades Principais
+
+- 📱 **Interface 100% Responsiva**: Gerencie suas obras diretamente do canteiro através de qualquer dispositivo.
+- 🎨 **Design Moderno**: Estética sofisticada com elementos de Glassmorphism e animações fluidas (AOS).
+- 🖱️ **Navegação Suave**: UX otimizada com navegação por scroll e âncoras inteligentes.
+- 📊 **Dashboard de Resultados**: Visualização clara do status das obras e indicadores financeiros.
+- 📋 **Gestão Técnica**: Controle de checklists, diários de obra e documentação centralizada.
+
+## 🛠️ Tecnologias Utilizadas
+
+- **Core**: [Angular 19+](https://angular.dev/)
+- **Styling**: SCSS (Sass) com Grid/Flexbox e Variáveis CSS.
+- **Animações**: [AOS (Animate On Scroll)](https://michalsnik.github.io/aos/)
+- **Gráficos**: [Chart.js](https://www.chartjs.org/)
+- **Deploy**: [Vercel](https://vercel.com/)
+
+## 👨‍💻 Autor
+
+Desenvolvido com ❤️ por **Lucas Alberto**.
+
+---
+
+## ⚙️ Como Executar o Projeto
+
+### Pré-requisitos
+- [Node.js](https://nodejs.org/) (v18 ou superior)
+- [Angular CLI](https://github.com/angular/angular-cli)
+
+### Instalação
+1. Clone o repositório
+2. Instale as dependências:
+   ```bash
+   npm install
+   ```
+
+### Iniciando o Servidor de Desenvolvimento
 ```bash
-ng serve
+npm start
 ```
+Acesse `http://localhost:4200/` no seu navegador.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+### Build para Produção
 ```bash
-ng generate component component-name
+npm run build
 ```
+Os arquivos otimizados serão gerados na pasta `dist/`.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+<div align="center">
+  <p>© 2026 Construtiva - Todos os direitos reservados.</p>
+</div>
