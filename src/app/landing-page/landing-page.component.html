@@ -1,4 +1,4 @@
-<header>
+<header class="main-header">
     <div class="container-content">
         <div class="logo">
             <img src="img/logoMP.png" alt="MP Logo" class="header-logo">
@@ -12,120 +12,141 @@
 </header>
 
 <main>
-    <section class="hero-section" data-aos="zoom-in" data-aos-duration="2000">
-        <span class="tag-sistema">Sistema Profissional de Gestão</span>
-        <h1>
-            Controle Total das Suas
-            <span class="highlight">Obras</span>
-        </h1>
-        <p class="subtitle-hero">
-            Simplifique a execução, fiscalização e acompanhamento de obras com uma plataforma completa e moderna
-        </p>
-
-        <div class="hero-actions">
-            <button class="cta-primary" [routerLink]="['/login']">Começar Agora ➔</button>
-            <button class="cta-secondary">Conheça as Funcionalidades</button>
-        </div>
-
-        <hr class="divider-hero">
-
-        <div class="stats-container">
-            <div class="stat-item">
-                <span class="stat-value">100%</span>
-                <span class="stat-label">Digital</span>
+    <section class="hero-section" data-aos="fade-up" data-aos-duration="1200">
+        <div class="container-content hero-grid">
+            <div class="hero-text-content">
+                <span class="tag-premium">SISTEMA PROFISSIONAL</span>
+                <h1>Gerencie suas Obras com <span class="highlight">Precisão Cirúrgica</span></h1>
+                <p class="subtitle-hero">
+                    A plataforma completa para engenheiros e construtores que buscam controle total, do orçamento à
+                    entrega final.
+                </p>
+                <div class="hero-actions">
+                    <button class="cta-primary" [routerLink]="['/login']">Entrar ➔</button>
+                    <button class="cta-secondary" (click)="scrollTo('solucoes')">Ver Como Funciona</button>
+                </div>
+            </div>
+            <div class="hero-visual" data-aos="fade-left">
+                <img src="img/system-hero-mockup.png" alt="Dashboard Construtiva" class="dashboard-img">
             </div>
         </div>
     </section>
 
-    <section class="funcionalidades">
-        <h2>Funcionalidades Completas</h2>
-        <p>Tudo que você precisa para gerenciar suas obras de forma profissional!</p>
-        <div class="cards-container">
-            <div class="card" data-aos="flip-left" data-aos-duration="1500">
-                <div class="icon-box">
-                    <img src="img/redIcons/admIconRed.svg" alt="Gestão">
+    <section id="problemas" class="problem-section" data-aos="fade-up">
+        <div class="container-content">
+            <div class="section-badge">O DESAFIO</div>
+            <h2>Cansado de planilhas confusas e falta de controle no canteiro?</h2>
+            <div class="problem-grid">
+                <div class="problem-item">
+                    <img src="img/pauseIcon.svg" alt="Custos extras">
+                    <p>Falta de visibilidade nos custos extras e aditivos contratuais.</p>
                 </div>
-                <h3>Gestão Completa de Obras</h3>
-                <p>Controle total de todas as suas obras em um único lugar, com informações sempre atualizadas.</p>
-            </div>
-            <div class="card" data-aos="flip-left" data-aos-duration="1500">
-                <div class="icon-box">
-                    <img src="img/redIcons/clipboardIconRed.svg" alt="Checklist">
+                <div class="problem-item">
+                    <img src="img/redIcons/calendarIconRed.svg" alt="Diários perdidos">
+                    <p>Diários de obra perdidos ou preenchidos de forma incompleta.</p>
                 </div>
-                <h3>Checklists Técnicos</h3>
-                <p>Garanta qualidade com checklists padronizados para início e entrega de projetos.</p>
-            </div>
-            <div class="card" data-aos="flip-left" data-aos-duration="1500">
-                <div class="icon-box">
-                    <img src="img/redIcons/calendarIconRed.svg" alt="Cronograma">
+                <div class="problem-item">
+                    <img src="img/redIcons/folderIcon.svg" alt="Documentação">
+                    <p>Documentação técnica espalhada em diversas pastas e e-mails.</p>
                 </div>
-                <h3>Cronogramas Detalhados</h3>
-                <p>Acompanhe prazos, aditivos e status de cada projeto em tempo real.</p>
-            </div>
-            <div class="card" data-aos="flip-left" data-aos-duration="1500">
-                <div class="icon-box">
-                    <img src="img/redIcons/coordinatorIconRed.svg" alt="Registro Fotográfico">
-                </div>
-                <h3>Registro Fotográfico</h3>
-                <p>Documentação visual completa com upload e organização de fotos da obra.</p>
-            </div>
-            <div class="card" data-aos="flip-left" data-aos-duration="1500">
-                <div class="icon-box">
-                    <img src="img/redIcons/nameIconRed.svg" alt="Diário de Obra">
-                </div>
-                <h3>Diário de Obra Digital</h3>
-                <p>Registre clima, atividades e ocorrências diariamente de forma profissional.</p>
-            </div>
-            <div class="card" data-aos="flip-left" data-aos-duration="1500">
-                <div class="icon-box">
-                    <img src="img/redIcons/teamIconRed.svg" alt="Gestão de Equipe">
-                </div>
-                <h3>Gestão de Equipe</h3>
-                <p>Controle completo de responsáveis, coordenadores e toda a equipe envolvida.</p>
             </div>
         </div>
     </section>
 
-    <hr>
-
-    <section class="porque-escolher">
-        <h2 class="title-por-que">Por que escolher o MP?</h2>
-        <p class="subtitle-por-que">Desenvolvido especificamente para atender as necessidades da construção civil</p>
-        <div class="beneficios-container">
-            <div class="beneficio">
-                <div class="icon-round">
-                    <img src="img/redIcons/statusIconRed.svg" alt="Segurança">
-                </div>
-                <h3>Segurança</h3>
-                <p>Seus dados protegidos e acessíveis apenas para sua equipe</p>
+    <section id="solucoes" class="solution-section">
+        <div class="container-content">
+            <div class="section-title-center">
+                <h2>A Solução Definitiva</h2>
+                <p>Construída especificamente para as necessidades reais da engenharia civil.</p>
             </div>
-            <div class="beneficio">
-                <div class="icon-round">
-                    <img src="img/redIcons/engineerIconRed.svg" alt="Manutenção">
-                </div>
-                <h3>Manutenção</h3>
-                <p>Controle mensal de manutenções com histórico completo</p>
-            </div>
-            <div class="beneficio">
-                <div class="icon-round">
-                    <img src="img/redIcons/contractIconRed.svg" alt="Documentação">
-                </div>
-                <h3>Documentação</h3>
-                <p>Todos os documentos organizados e sempre disponíveis</p>
+            <div class="solution-grid">
+                <article class="solution-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="icon-wrap"><img src="img/redIcons/statusIconRed.svg" alt="Financeiro"></div>
+                    <h3>Controle Financeiro</h3>
+                    <p>Acompanhe aditivos, orçamentos e custos em tempo real para evitar surpresas no fechamento.</p>
+                </article>
+                <article class="solution-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="icon-wrap"><img src="img/redIcons/clipboardIconRed.svg" alt="Técnico"></div>
+                    <h3>Gestão Técnica</h3>
+                    <p>Checklists padronizados e Diários de Obra digitais com registro fotográfico instantâneo.</p>
+                </article>
+                <article class="solution-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="icon-wrap"><img src="img/redIcons/contractIconRed.svg" alt="Documentos"></div>
+                    <h3>Documentação Centralizada</h3>
+                    <p>Todos os projetos, contratos e relatórios organizados e acessíveis de qualquer lugar.</p>
+                </article>
             </div>
         </div>
     </section>
 
-    <section class="cta-section">
-        <h2>Pronto para revolucionar sua gestão de obras?</h2>
-        <p>Junte-se às empresas que já transformaram sua forma de trabalhar</p>
-        <button class="acessar-sistema cta-button" [routerLink]="['/login']">Acessar Sistema ➔</button>
+    <section id="como-funciona" class="how-it-works" data-aos="fade-up">
+        <div class="container-content">
+            <h2>Como Funciona</h2>
+            <div class="steps-grid">
+                <div class="step">
+                    <div class="step-number">01</div>
+                    <h4>Cadastre sua Obra</h4>
+                    <p>Configure as informações básicas, equipe e prazos em poucos minutos.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">02</div>
+                    <h4>Gerencie o Dia a Dia</h4>
+                    <p>Alimente o sistema com fotos, diários e checklists diretamente do canteiro.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">03</div>
+                    <h4>Monitore Resultados</h4>
+                    <p>Acesse o dashboard e relatórios para tomar decisões baseadas em dados reais.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="faq-section" data-aos="fade-up">
+        <div class="container-content">
+            <div class="faq-header">
+                <h2>Perguntas Frequentes</h2>
+                <p>Address top objections quickly.</p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h5>Os meus dados estão seguros?</h5>
+                    <p>Sim, utilizamos criptografia de ponta a ponta e backups diários para garantir a integridade das
+                        suas obras.</p>
+                </div>
+                <div class="faq-item">
+                    <h5>Funciona no celular?</h5>
+                    <p>Com certeza! Nossa interface é totalmente responsiva para que você gerencie tudo direto do
+                        canteiro de obras.</p>
+                </div>
+                <div class="faq-item">
+                    <h5>Tenho suporte técnico?</h5>
+                    <p>Oferecemos suporte prioritário para todos os nossos usuários via chat e e-mail.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="final-cta" data-aos="zoom-in">
+        <div class="container-content">
+            <div class="glass-cta">
+                <h2>Pronto para revolucionar sua gestão?</h2>
+                <p>Junte-se à nova era da construção civil digital.</p>
+                <button class="cta-primary-large" [routerLink]="['/login']">Começar Agora Grátis ➔</button>
+                <span class="no-card">Não requer cartão de crédito • Configuração rápida</span>
+            </div>
+        </div>
     </section>
 </main>
 
-<footer>
-    <div class="container-content">
-        <p>Medeiros & Pinheiro</p>
-        <p>ARQ/ENG</p>
+<footer class="main-footer">
+    <div class="container-content footer-content">
+        <div class="footer-brand">
+            <span class="logo-mp">CONSTRUTIVA</span>
+            <p>Medeiros & Pinheiro ARQ/ENG</p>
+        </div>
+        <div class="footer-links">
+            <p>© 2026 Todos os direitos reservados.</p>
+        </div>
     </div>
 </footer>

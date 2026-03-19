@@ -1,444 +1,564 @@
 @use "sass:color";
 
 $color-primary: #ED213C;
-$color-dark: #333;
-$color-light: #fff;
-$color-gray: #666;
-$color-border: #eee;
-$breakpoint-tablet: 768px;
-$breakpoint-mobile: 420px; 
+$color-primary-dark: #c62828;
+$color-dark: #1a1a1a;
+$color-light: #ffffff;
+$color-gray-dark: #333333;
+$color-gray: #666666;
+$color-gray-light: #f5f5f5;
+$color-glass: rgba(255, 255, 255, 0.8);
+$color-border-glass: rgba(255, 255, 255, 0.3);
 
-@mixin mobile {
-    @media (max-width: $breakpoint-mobile) {
-        @content;
-    }
-}
+$breakpoint-tablet: 992px;
+$breakpoint-mobile: 600px;
 
-@mixin tablet {
-    @media (max-width: $breakpoint-tablet) {
-        @content;
-    }
-}
+@mixin mobile { @media (max-width: $breakpoint-mobile) { @content; } }
+@mixin tablet { @media (max-width: $breakpoint-tablet) { @content; } }
 
 .container-content {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 0 24px;
     width: 100%;
+    box-sizing: border-box;
 
     @include mobile {
-        gap: 15px;
-        width: auto; 
+        padding: 0 16px;
     }
 }
 
+:host {
+    display: block;
+    background-color: $color-light;
+    overflow-x: hidden;
+}
 
+.main-header {
+    background: $color-glass;
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
 
-h2 {
-    font-weight: 700;
-    font-size: 1.8em;
-    color: $color-dark;
-    margin-bottom: 10px;
+    .container-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
-    &.title-por-que {
-        font-size: 2em;
-        color: $color-primary;
+        @include mobile {
+            padding: 0 16px;
+        }
     }
-}
 
-h3 {
-    font-weight: 600;
-    font-size: 1.1em;
-    margin-bottom: 5px;
-}
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
 
-p {
-    font-size: 0.9em;
+        @include mobile {
+            gap: 6px;
+        }
+
+        .header-logo {
+            height: 40px;
+            width: auto;
+
+            @include mobile {
+                height: 24px;
+            }
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            
+            .logo-mp {
+                font-size: 1.25rem;
+                font-weight: 800;
+                letter-spacing: -0.5px;
+                color: $color-dark;
+
+                @include mobile {
+                    font-size: 0.9rem;
+                    letter-spacing: 0;
+                }
+            }
+
+            .logo-sub {
+                font-size: 0.75rem;
+                color: $color-gray;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+
+                @include mobile {
+                    display: none;
+                }
+            }
+        }
+    }
 }
 
 .acessar-sistema {
-    background-color: $color-primary;
-    color: $color-light;
+    background: $color-primary;
+    color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 10px 24px;
+    border-radius: 50px;
     font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    font-size: 0.9em;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba($color-primary, 0.3);
+    white-space: nowrap;
 
     &:hover {
-        background-color: color.adjust($color-primary, $lightness: -10%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba($color-primary, 0.4);
+        background: $color-primary-dark;
     }
 
     @include mobile {
-        padding: 6px 10px; 
-        font-size: 0.7em; 
+        padding: 8px 12px;
+        font-size: 0.7rem;
     }
 }
-
-
-header {
-    padding: 20px 0; 
-    border-bottom: 1px solid $color-border;
-    width: 100%; 
-    max-width: none; 
-}
-
-.logo {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    line-height: 1.2;
-
-    &-mp {
-        font-size: 1.5em;
-        font-weight: 700;
-        color: #000;
-
-        @include mobile {
-            font-size: 1em; 
-        }
-    }
-
-    .logo-text {
-        display: flex;
-        flex-direction: column;
-        margin-left: 10px;
-    }
-
-    &-sub {
-        font-size: 0.8em;
-        color: #888;
-        font-weight: 400;
-
-        @include mobile {
-            font-size: 0.6em; 
-        }
-    }
-
-    .header-logo {
-        width: 50px;
-        margin-right: 10px;
-
-        @include mobile {
-            width: 35px; 
-        }
-    }
-}
-
-hr {
-    border: 0;
-    height: 1px;
-    background-color: $color-border;
-    margin: 40px 0;
-}
-
 
 .hero-section {
-    text-align: center;
-    padding: 80px 50px 40px;
-    
+    padding: 80px 0;
+    background: radial-gradient(circle at top right, rgba($color-primary, 0.05), transparent 40%),
+                radial-gradient(circle at bottom left, rgba($color-primary, 0.03), transparent 30%);
+
     @include mobile {
-        padding: 40px 20px 20px;
+        padding: 40px 0;
+        overflow-x: hidden;
     }
 
-    .tag-sistema {
+    .hero-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 60px;
+        align-items: center;
+
+        @include tablet {
+            grid-template-columns: 1fr;
+            text-align: center;
+            gap: 20px;
+        }
+    }
+
+    .tag-premium {
         display: inline-block;
-        background-color: color.adjust($color-primary, $lightness: 35%);
+        background: rgba($color-primary, 0.1);
         color: $color-primary;
-        font-size: 0.8em;
-        font-weight: 600;
-        padding: 5px 15px;
-        border-radius: 20px;
-        margin-bottom: 25px;
+        padding: 6px 16px;
+        border-radius: 100px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
     }
 
     h1 {
-        font-size: 3.5em;
-        font-weight: 700;
-        margin-bottom: 15px;
+        font-size: 4rem;
         line-height: 1.1;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        color: $color-dark;
 
-        @include mobile {
-            font-size: 2.5em;
-        }
+        .highlight { color: $color-primary; }
 
-        .highlight {
-            color: $color-primary;
+        @include mobile { 
+            font-size: 1.8rem;
+            line-height: 1.2;
         }
     }
 
     .subtitle-hero {
-        font-size: 1.1em;
+        font-size: 1.25rem;
         color: $color-gray;
-        margin-bottom: 30px;
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
+        max-width: 540px;
+        margin-bottom: 2.5rem;
+        line-height: 1.6;
+
+        @include tablet { margin: 0 auto 2.5rem; }
+        @include mobile { font-size: 1.1rem; }
     }
 
     .hero-actions {
         display: flex;
-        justify-content: center;
         gap: 20px;
-        margin-bottom: 40px;
+        margin-bottom: 3rem;
 
-        @include mobile {
+        @include tablet { justify-content: center; }
+        @include mobile { 
             flex-direction: column;
-            gap: 15px;
-            
-            button {
-                width: 100%;
-            }
+            gap: 10px;
+            padding: 0;
+            width: 100%;
         }
     }
 
     .cta-primary {
         @extend .acessar-sistema;
-        font-size: 1em;
-        padding: 15px 35px;
-        font-weight: 700;
+        padding: 18px 36px;
+        font-size: 1.100rem;
+
+        @include mobile {
+            padding: 14px 20px;
+            font-size: 0.9rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
     }
 
     .cta-secondary {
-        background: none;
-        border: 1px solid $color-border;
-        color: $color-dark;
-        font-size: 1em;
-        padding: 15px 35px;
-        border-radius: 5px;
-        cursor: pointer;
+        background: white;
+        border: 2px solid $color-gray-light;
+        padding: 18px 36px;
+        border-radius: 50px;
         font-weight: 600;
-        transition: background-color 0.3s;
+        color: $color-dark;
+        transition: all 0.3s ease;
 
         &:hover {
-            background-color: $color-border;
-        }
-    }
-
-    .divider-hero {
-        border: 0;
-        height: 1px;
-        background-color: $color-border;
-        margin: 40px auto;
-        width: 80%;
-    }
-
-    .stats-container {
-        display: flex;
-        justify-content: center;
-        gap: 80px;
-        padding-bottom: 40px;
-
-        @include mobile {
-            gap: 30px;
-        }
-
-        .stat-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-            .stat-value {
-                font-size: 2em;
-                font-weight: 700;
-                color: $color-primary;
-                line-height: 1;
-            }
-
-            .stat-label {
-                font-size: 0.9em;
-                color: $color-gray;
-                margin-top: 5px;
-            }
-        }
-    }
-}
-
-.funcionalidades {
-    text-align: center;
-    padding: 40px 50px; 
-    
-    @include mobile {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-
-    & > p {
-        font-size: 1em;
-        color: #555;
-        margin-bottom: 30px;
-    }
-
-    .cards-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 30px;
-        justify-content: center;
-    }
-
-    .card {
-        width: calc(33.333% - 20px);
-        min-width: 250px;
-        text-align: center;
-        padding: 30px 20px;
-        border-radius: 8px;
-        background-color: #f9f9f9;
-        border: 1px solid $color-border;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-
-        @include tablet {
-            width: calc(50% - 15px);
-        }
-
-        @include mobile {
-            width: 100%;
-            min-width: auto;
-        }
-
-        p {
-            font-size: 0.85em;
-            color: $color-gray;
-        }
-
-        strong {
-            font-weight: 600;
-            color: $color-dark;
-        }
-
-        .icon-box {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            width: 60px;
-            height: 60px;
-            border: 2px solid $color-border;
-            border-radius: 8px;
-            margin: 0 auto 20px;
-
-            img {
-                width: 40px;
-                height: 40px;
-            }
-        }
-    }
-}
-
-.porque-escolher {
-    text-align: center;
-    padding: 20px 50px 40px;
-    
-    @include mobile {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-
-    .subtitle-por-que {
-        font-size: 1.1em;
-        color: #555;
-        margin-bottom: 30px;
-    }
-
-    .beneficios-container {
-        display: flex;
-        justify-content: space-around;
-        gap: 20px;
-        padding: 0 50px;
-
-        @include tablet {
-            flex-direction: column;
-            align-items: center;
-            padding: 0;
-        }
-    }
-
-    .beneficio {
-        flex: 1;
-        text-align: center;
-        max-width: 300px;
-
-        @include tablet {
-            margin-bottom: 20px;
-        }
-
-        .icon-round {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 15px;
-            border-radius: 8px;
-            border: 2px solid $color-border;
-            background-color: transparent;
-
-            img {
-                width: 40px;
-                height: 40px;
-            }
-        }
-
-        h3 {
-            text-transform: uppercase;
+            border-color: $color-primary;
             color: $color-primary;
-            margin-bottom: 10px;
         }
 
-        p {
-            color: $color-gray;
-        }
-    }
-}
-
-.cta-section {
-    background-color: #f0f0f0;
-    text-align: center;
-    padding: 50px 20px;
-    border-radius: 8px;
-    margin-top: 40px;
-    margin-left: 50px;
-    margin-right: 50px;
-    
-    @include mobile {
-        margin-left: 20px;
-        margin-right: 20px;
-    }
-
-    .cta-button {
-        font-size: 1.1em;
-        padding: 12px 30px;
-    }
-}
-
-footer {
-    background-color: #222;
-    color: $color-light;
-    text-align: center;
-    padding: 15px 0; 
-    font-size: 0.8em;
-    line-height: 1.2;
-    margin-top: 40px;
-    width: 100%; 
-    max-width: none; 
-
-    p { 
         @include mobile {
-            font-size: 0.6em; 
-            line-height: 1.1; 
+            padding: 14px 20px;
+            font-size: 0.9rem;
+            width: 100%;
+            box-sizing: border-box;
         }
     }
 
-    p:first-child {
-        font-weight: 600;
+    .trust-indicator {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        font-size: 0.9rem;
+        color: $color-gray;
+
+        @include tablet { justify-content: center; }
+
+        @include mobile {
+            flex-direction: column;
+            gap: 10px;
+            font-size: 0.75rem;
+            text-align: center;
+        }
+
+        .avatars {
+            display: flex;
+            img {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                border: 2px solid white;
+                margin-right: -10px;
+                background: #eee;
+            }
+        }
     }
 
+    .hero-visual {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        @include tablet {
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .dashboard-img {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.1);
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+            @include tablet {
+                max-width: 600px;
+                margin-top: 2rem;
+            }
+
+            @include mobile {
+                border-radius: 12px;
+                box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            }
+
+            &:hover {
+                transform: translateY(-15px) scale(1.03);
+                box-shadow: 0 60px 120px rgba($color-primary, 0.2);
+            }
+        }
+    }
+}
+
+.problem-section {
+    padding: 100px 0;
+    background: #fafafa;
+    text-align: center;
+
     @include mobile {
-        padding: 8px 0; 
-        width: auto; 
+        padding: 60px 0;
+    }
+
+    .section-badge {
+        color: $color-primary;
+        font-weight: 800;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 1rem;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        max-width: 800px;
+        margin: 0 auto 4rem;
+        color: $color-dark;
+
+        @include mobile { 
+            font-size: 1.6rem; 
+            margin-bottom: 2.5rem;
+        }
+    }
+
+    .problem-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+
+        @include mobile {
+            grid-template-columns: 1fr;
+            gap: 20px;
+            padding: 0 10px;
+        }
+    }
+
+    .problem-item {
+        background: white;
+        padding: 40px;
+        border-radius: 24px;
+        border: 1px solid rgba(0,0,0,0.03);
+        transition: all 0.3s ease;
+
+        @include mobile {
+            padding: 30px 20px;
+        }
+
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+
+        img { width: 32px; margin-bottom: 1.5rem; opacity: 0.6; }
+        p { color: $color-gray; line-height: 1.6; font-weight: 500; }
+    }
+}
+
+.solution-section {
+    padding: 80px 0;
+
+    @include mobile {
+        padding: 60px 0;
+    }
+
+    .section-title-center {
+        text-align: center;
+        margin-bottom: 5rem;
+        h2 { font-size: 3rem; font-weight: 800; margin-bottom: 1rem; }
+        p { color: $color-gray; font-size: 1.2rem; }
+
+        @include mobile {
+            margin-bottom: 3rem;
+            h2 { font-size: 2rem; }
+            p { font-size: 1.1rem; }
+        }
+    }
+
+    .solution-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+
+        @include tablet { grid-template-columns: 1fr; }
+        @include mobile { gap: 20px; }
+    }
+
+    .solution-card {
+        background: white;
+        padding: 48px;
+        border-radius: 32px;
+        border: 1px solid $color-gray-light;
+        transition: all 0.3s ease;
+
+        @include mobile {
+            padding: 32px 24px;
+            border-radius: 24px;
+        }
+
+        &:hover {
+            border-color: $color-primary;
+            .icon-wrap { background: $color-primary; img { filter: brightness(0) invert(1); } }
+        }
+
+        .icon-wrap {
+            width: 64px;
+            height: 64px;
+            background: $color-gray-light;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+
+            img { width: 32px; }
+        }
+
+        h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; }
+        p { color: $color-gray; line-height: 1.7; }
+    }
+}
+
+.how-it-works {
+    padding: 100px 0;
+    background: $color-dark;
+    color: white;
+
+    @include mobile {
+        padding: 60px 0;
+    }
+
+    h2 { text-align: center; font-size: 2.5rem; font-weight: 800; margin-bottom: 5rem; }
+
+    @include mobile {
+        h2 { font-size: 2rem; margin-bottom: 3rem; }
+    }
+
+    .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 60px;
+
+        @include tablet { grid-template-columns: 1fr; gap: 40px; }
+        @include mobile { gap: 30px; padding: 0 10px; }
+    }
+
+    .step {
+        .step-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: rgba($color-primary, 0.3);
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            font-family: serif;
+        }
+        h4 { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; }
+        p { color: #aaa; line-height: 1.6; }
+    }
+}
+
+.faq-section {
+    padding: 100px 0;
+    background: #fafafa;
+
+    .faq-header {
+        text-align: center;
+        margin-bottom: 4rem;
+        h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
+    }
+
+    .faq-grid {
+        max-width: 800px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .faq-item {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        border: 1px solid rgba(0,0,0,0.03);
+
+        h5 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem; color: $color-dark; }
+        p { color: $color-gray; line-height: 1.6; }
+    }
+}
+
+.final-cta {
+    padding: 80px 0;
+    background: linear-gradient(to bottom, transparent, rgba($color-primary, 0.05));
+
+    .glass-cta {
+        background: linear-gradient(135deg, $color-primary 0%, color.adjust($color-primary, $lightness: -10%) 100%);
+        padding: 80px 40px;
+        border-radius: 40px;
+        text-align: center;
+        color: white;
+        box-shadow: 0 30px 60px rgba($color-primary, 0.3);
+
+        h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1.5rem; }
+        p { font-size: 1.2rem; opacity: 0.9; margin-bottom: 2.5rem; }
+
+        .cta-primary-large {
+            @extend .acessar-sistema;
+            background: white;
+            color: $color-primary;
+            padding: 20px 48px;
+            font-size: 1.2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+
+            &:hover {
+                background: $color-gray-light;
+                transform: scale(1.05);
+            }
+        }
+
+        .no-card {
+            display: block;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        @include mobile {
+            padding: 50px 20px;
+            border-radius: 24px;
+            h2 { font-size: 1.6rem; }
+            p { font-size: 1rem; margin-bottom: 2rem; }
+            .cta-primary-large { width: 100%; padding: 14px 20px; font-size: 1rem; }
+        }
+    }
+}
+
+.main-footer {
+    padding: 60px 0 30px;
+    border-top: 1px solid $color-gray-light;
+
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+
+        @include mobile { flex-direction: column; align-items: center; gap: 24px; text-align: center; }
+    }
+
+    .footer-brand {
+        .logo-mp { font-size: 1.25rem; font-weight: 800; margin-bottom: 5px; display: block; }
+        p { color: $color-gray; font-size: 0.85rem; }
+    }
+
+    .footer-links {
+        p { color: $color-gray; font-size: 0.8rem; }
     }
 }
 
