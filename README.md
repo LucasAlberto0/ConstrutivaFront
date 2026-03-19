@@ -1,6 +1,6 @@
 <div align="center">
   <img src="public/img/logoMP.png" alt="Construtiva Logo" width="120">
-  <h1>CONSTRUTIVA</h1>
+  <h1>CONSTRUTIVA (Front-End)</h1>
   <p><strong>Gestão de Obras com Precisão Cirúrgica</strong></p>
   
   [![Angular](https://img.shields.io/badge/Angular-19.2-DD0031?style=for-the-badge&logo=angular)](https://angular.dev/)
@@ -9,19 +9,19 @@
 
 ---
 
-## 🏗️ Sobre o Projeto
+##  Sobre o Projeto
 
 O **Construtiva** é uma plataforma moderna e intuitiva desenvolvida para profissionais da engenharia civil e arquitetura que buscam controle total e transparência no canteiro de obras. Do gerenciamento de orçamentos e aditivos à documentação técnica e diários de obra, o sistema centraliza as informações críticas para garantir a entrega no prazo e no custo planejado.
 
 Esta interface foi redesenhada para oferecer uma experiência de usuário **premium**, com foco em conversão e usabilidade mobile.
 
-## 🚀 Inspiração & Origem
+##  Inspiração & Origem
 
 Este projeto nasceu de uma ideia original de sistema da empresa **Medeiros e Pinheiro ARQ/ENG**, referência em soluções técnicas para construção civil.
 
 🔗 **Visite o site oficial:** [medeirosepinheiro.com.br](https://medeirosepinheiro.com.br/)
 
-## ✨ Funcionalidades Principais
+##  Funcionalidades Principais
 
 - 📱 **Interface 100% Responsiva**: Gerencie suas obras diretamente do canteiro através de qualquer dispositivo.
 - 🎨 **Design Moderno**: Estética sofisticada com elementos de Glassmorphism e animações fluidas (AOS).
@@ -29,7 +29,7 @@ Este projeto nasceu de uma ideia original de sistema da empresa **Medeiros e Pin
 - 📊 **Dashboard de Resultados**: Visualização clara do status das obras e indicadores financeiros.
 - 📋 **Gestão Técnica**: Controle de checklists, diários de obra e documentação centralizada.
 
-## 🛠️ Tecnologias Utilizadas
+##  Tecnologias Utilizadas
 
 - **Core**: [Angular 19+](https://angular.dev/)
 - **Styling**: SCSS (Sass) com Grid/Flexbox e Variáveis CSS.
@@ -37,13 +37,13 @@ Este projeto nasceu de uma ideia original de sistema da empresa **Medeiros e Pin
 - **Gráficos**: [Chart.js](https://www.chartjs.org/)
 - **Deploy**: [Vercel](https://vercel.com/)
 
-## 👨‍💻 Autor
+##  Autor
 
-Desenvolvido com ❤️ por **Lucas Alberto**.
+Desenvolvido por **Lucas Alberto**.
 
 ---
 
-## ⚙️ Como Executar o Projeto
+##  Como Executar o Projeto
 
 ### Pré-requisitos
 - [Node.js](https://nodejs.org/) (v18 ou superior)
